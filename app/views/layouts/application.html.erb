@@ -8,20 +8,20 @@
 
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body id="top">
 
 <%= render 'layouts/header' %>
 
-<%= render 'layouts/airmarket_lander' %>
+    <div class="container">
 
-<div id="airmarket-content" class="container">
+      <% flash.each do |name, msg| %>
+          <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
+      <% end %>
 
-  <% flash.each do |name, msg| %>
-      <%= content_tag(:div, msg, class: "alert alert-#{name}") %>
-  <% end %>
+      <%= yield %>
+    </div>
 
-    <%= yield %>
-</div>
+<%= render 'layouts/footer' %>
 
 </body>
 </html>

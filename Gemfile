@@ -17,6 +17,8 @@ gem 'devise'
 gem 'paperclip', '~> 4.2'
 gem 'jquery-turbolinks'
 gem 'aws-sdk', '< 2.0'
+gem "font-awesome-rails"
+gem 'masonry-rails'
 
 
 group :development, :test do

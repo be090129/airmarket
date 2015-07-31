@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
 
-  devise_for :users
+  devise_for :users, path_names: {sign_in: "login"}
   resources :listings
   resources :images
   root 'pages#home'
+
+  get "about" => "pages#about"
 
 
   # The priority is based upon order of creation: first created -> highest priority.

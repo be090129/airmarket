@@ -1,29 +1,26 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h1>Sign up</h1>
-  </div>
+<%# encoding: utf-8 %>
 
-  <div class="panel-body">
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
+<div id="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-4 col-md-offset-4">
+        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
 
-        <div class="form-group">
-          <%= f.label :email %>
-          <%= f.email_field :email, autofocus: true, class: "form-control" %>
-        </div>
+            <div class="form-group">
+              <%= f.label :email, "Adresse email" %>
+              <%= f.email_field :email, class: "form-control", :autofocus => true %>
+            </div>
 
-        <div class="form-group">
-          <%= f.label :password %>
-          <%= f.password_field :password, class: "form-control" %>
-        </div>
+            <div class="form-group">
+              <%= f.label :password, "Mot de passe" %>
+              <%= f.password_field :password, class: "form-control" %>
+            </div>
 
-        <div class="form-group">
-          <%= f.submit "Sign up", class: "btn btn-primary" %>
-        </div>
-    <% end %>
-  </div>
-
-  <div class="panel-footer">
-    <%= render "devise/shared/links" %>
+            <div class="form-group">
+              <%= f.submit "Créer un compte", class: "btn btn-success" %>
+            </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

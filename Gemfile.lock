@@ -70,6 +70,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.5.2)
+    font-awesome-rails (4.3.0.0)
+      railties (>= 3.2, < 5.0)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -88,6 +90,8 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    masonry-rails (0.2.4)
+      railties
     mime-types (2.6.1)
     mini_portile (0.6.2)
     minitest (5.7.0)
@@ -179,9 +183,11 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   coffee-script-source (= 1.8.0)
   devise
+  font-awesome-rails
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  masonry-rails
   paperclip (~> 4.2)
   pg
   rails (= 4.2.1)
