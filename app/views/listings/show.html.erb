@@ -11,7 +11,7 @@
 </p>
 
 <% @listing.images.each do |vimage| %>
-    <div><%= image_tag(vimage.photo.url(:medium, timestamp:false), class: "img-responsive")%></div>
+    <div><%= image_tag(vimage.photo.url(:medium), class: "img-responsive")%></div>
 <% end %>
 
 <% if @listing.user == current_user %>
