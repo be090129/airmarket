@@ -10,6 +10,9 @@
   <%= @listing.description %>
 </p>
 
+<% @listing.images.each do |vimage| %>
+    <%= image_tag(vimage.photo.url(:medium), class: "img-responsive" %></div>
+<% end %>
 
 
 <% if @listing.user == current_user %>
