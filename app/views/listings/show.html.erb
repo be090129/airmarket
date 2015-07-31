@@ -14,7 +14,6 @@
     <div><%= image_tag(vimage.photo.url(:medium), class: "img-responsive")%></div>
 <% end %>
 
-
 <% if @listing.user == current_user %>
     <%= link_to 'Edit', edit_listing_path(@listing) %> |
 <% end %>
