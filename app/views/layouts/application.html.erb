@@ -12,7 +12,9 @@
 
 <%= render 'layouts/header' %>
 
-<div class="container">
+<%= render 'layouts/airmarket_lander' %>
+
+<div id="airmarket-content" class="container">
 
   <% flash.each do |name, msg| %>
       <%= content_tag(:div, msg, class: "alert alert-#{name}") %>

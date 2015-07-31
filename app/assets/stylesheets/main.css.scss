@@ -6,3 +6,80 @@
 @import 'bootstrap';
 
 /* Header */
+
+  /* navbar */
+
+  .navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+  }
+
+  .navbar-default {
+    background-color: #ffffff;
+    border-color: #ffffff;
+  }
+
+
+  /* link */
+  .navbar-default .navbar-nav > li > a {
+    color: #000;
+
+  }
+
+  .navbar-default .navbar-nav > li > a:hover,
+  .navbar-default .navbar-nav > li > a:focus {
+    color: #96CC9A  ;
+  }
+  /* breadcrumbs */
+
+  #wrapper-breadcrumbs {
+    background: #2B2D2E none repeat scroll 0px 0px;
+    color: #FFF;
+    padding: 15px 0px;
+  }
+
+  #wrapper-breadcrumbs h1 {
+    font-size: 18px;
+    line-height: 24px;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  .pull-left {
+    float: left !important;
+  }
+
+  #breadcrumbs {
+    background: transparent none repeat scroll 0px 0px;
+    font-size: 11px;
+    margin: 0px;
+    padding: 0px;
+    line-height: 24px;
+    text-transform: uppercase;
+  }
+
+  .pull-right {
+    float: right !important;
+  }
+
+  #breadcrumbs .slash {
+    padding: 0px 5px;
+  }
+
+  #breadcrumbs a {
+    color: #FFF;
+    text-decoration: none;
+  }
+
+  #breadcrumbs .breadcrumb_last {
+    color: #96CC9A;
+  }
+
+  /* Content */
+
+  #airmarket-content {
+    margin-top: 40px;
+  }
+
