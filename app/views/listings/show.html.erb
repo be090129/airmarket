@@ -11,7 +11,7 @@
 </p>
 
 <% @listing.images.each do |vimage| %>
-    <%= image_tag(vimage.photo.url(:medium), class: "img-responsive")%></div>
+    <div><%= image_tag(vimage.photo.url(:medium), class: "img-responsive")%></div>
 <% end %>
 
 
