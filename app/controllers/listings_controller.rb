@@ -3,10 +3,12 @@ class ListingsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
+
   # GET /listings
   # GET /listings.json
   def index
     @listings = Listing.all
+
   end
 
   # GET /listings/1
@@ -21,6 +23,7 @@ class ListingsController < ApplicationController
 
   # GET /listings/1/edit
   def edit
+
   end
 
   # POST /listings
@@ -76,6 +79,6 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:name, :description)
+      params.require(:listing).permit(:name, :description, :images_attributes => [:id, :_destroy, :photo, :listing_id])
     end
 end
