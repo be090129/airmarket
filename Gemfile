@@ -15,6 +15,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'paperclip', '~> 4.2'
+gem 'jquery-turbolinks'
+gem 'aws-sdk', '< 2.0'
+
 
 group :development, :test do
   gem 'sqlite3'
@@ -23,4 +26,5 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+
 end
