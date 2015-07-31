@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :list, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
 
@@ -8,7 +8,10 @@ class ListingsController < ApplicationController
   # GET /listings.json
   def index
     @listings = Listing.all
+  end
 
+  def list
+    @listings = Listing.all
   end
 
   # GET /listings/1
