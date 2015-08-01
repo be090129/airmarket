@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :list, :show]
+  before_action :authenticate_user!, except: [:index, :index2, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
 
