@@ -10,8 +10,12 @@ class ListingsController < ApplicationController
     @listings = Listing.all
   end
 
-  def list
+  def index2
     @listings = Listing.all
+  end
+
+  def managelistings
+    @listings = current_user.listings
   end
 
   # GET /listings/1

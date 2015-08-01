@@ -1,0 +1,50 @@
+<!-- begin:article -->
+<div class="col-md-9 col-md-push-3">
+
+  <!-- begin:product -->
+  <div class="row container-realestate">
+    <% @listings.each do |listing|%>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="property-container">
+            <div class="property-content-list">
+              <div class="property-image-list">
+                <img src=".././images/img13.jpg" alt="mikha real estate theme">
+
+                <div class="property-status">
+
+                </div>
+                <div class="property-features">
+                    <%= listing.name%>
+                </div>
+              </div>
+              <div class="property-text">
+                <h3><a href="#"><%= listing.name%></h3>
+
+                <p><a href="#" class="btn btn-success">Visualiser &raquo;</a></p>
+                <p><%= link_to "Modifier", edit_path(listing.id), {:class => "btn btn-success"} %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+    <%end%>
+  </div>
+  <!-- end:product -->
+
+  <!-- begin:pagination -->
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="pagination">
+        <li class="disabled"><a href="#">&laquo;</a></li>
+        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">&raquo;</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- end:pagination -->
+
+</div>
+<!-- end:article -->

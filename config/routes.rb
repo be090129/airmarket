@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   get "about" => "pages#about"
-  get "listings-list" => "listings#list"
+  get "listings-list" => "listings#index2"
+  get "manage-listings" => "listings#managelistings"
+  get 'manage-listings/:id' => 'listings#edit', as: :edit
 
 
   # The priority is based upon order of creation: first created -> highest priority.
