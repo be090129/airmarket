@@ -1,0 +1,23 @@
+<!-- begin:sidebar -->
+<div class="col-md-3 sidebar">
+  <!-- break -->
+  <div class="widget widget-sidebar widget-white">
+    <% if user_signed_in? &&@listing.user == current_user %>
+        <div class="widget-header">
+          <h3>Modification</h3>
+        </div>
+        <ul>
+          <li> <%= link_to 'Modifier cette annonce', modification_path(@listing) %> </li>
+        </ul>
+    <%else%>
+
+        <div class="widget-header">
+          <h3>Réservation</h3>
+        </div>
+
+    <% end %>
+
+  </div>
+  <!-- break -->
+</div>
+<!-- end:sidebar -->

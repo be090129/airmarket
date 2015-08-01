@@ -15,7 +15,7 @@ class ListingsController < ApplicationController
   end
 
   def managelistings
-    @listings = current_user.listings
+    @listings = current_user.listings.order(:name)
   end
 
   # GET /listings/1
@@ -68,7 +68,7 @@ class ListingsController < ApplicationController
   def destroy
     @listing.destroy
     respond_to do |format|
-      format.html { redirect_to listings_url, notice: 'Listing was successfully destroyed.' }
+      format.html { redirect_to manage_listings_path, notice: 'Listing was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -86,6 +86,6 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:name, :description, :images_attributes => [:id, :_destroy, :photo, :listing_id])
+      params.require(:listing).permit(:name, :summary,:description, :images_attributes => [:id, :_destroy, :photo, :listing_id])
     end
 end

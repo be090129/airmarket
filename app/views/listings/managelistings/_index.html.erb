@@ -8,7 +8,9 @@
           <div class="property-container">
             <div class="property-content-list">
               <div class="property-image-list">
-                <img src=".././images/img13.jpg" alt="mikha real estate theme">
+                <% listing.images.limit(1).each do |vimage| %>
+                   <%= image_tag(vimage.photo.url(:medium), class: "img-responsive")%>
+                <% end %>
 
                 <div class="property-status">
 
@@ -19,10 +21,20 @@
               </div>
               <div class="property-text">
                 <h3><a href="#"><%= listing.name%></h3>
-
-                <p><a href="#" class="btn btn-success">Visualiser &raquo;</a></p>
-                <p><%= link_to "Modifier", edit_path(listing.id), {:class => "btn btn-success"} %></p>
-                <p><%= link_to "Effacer cette annonce", edit_path(listing.id), {:class => "btn btn-danger"} %></p>
+                <p><%= listing.summary %></p>
+                <div class="row">
+                  <div class="col-xs-12 col-md-3">
+                    <%= link_to "Visualiser",listing_path(listing) , class: "btn btn-success" %>
+                  </div>
+                  <div class="col-xs-12 col-md-3">
+                    <%= link_to "Modifier", modification_path(listing.id), {:class => "btn btn-warning"} %>
+                  </div>
+                  <div class="col-xs-12 col-md-3">
+                    <%= link_to listing_path(listing), :class => 'btn btn-danger', :method => :delete, :data => { :confirm => 'Quel dommage !' }  do %>
+                        Effacer cette annonce
+                    <% end %>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

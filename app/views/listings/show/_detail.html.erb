@@ -1,0 +1,63 @@
+<!-- begin:article -->
+<div class="col-md-9">
+  <div class="row">
+    <div class="col-md-12 single-post">
+      <div id="myTabContent" class="tab-content">
+          <div class="tab-pane fade in active" id="detail">
+              <div class="row">
+                <div class="col-md-12">
+                  <h2><%= @listing.name %></h2>
+                  <div id="slider-property" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <% @listing.images.each_with_index do |item, index| %>
+                          <li data-target="#slider-property" data-slide-to="<%= index %>" class="">
+                                <div><%= image_tag(item.photo.url(:medium), class: "img-responsive")%></div>
+                          </li>
+                      <% end %>
+                    </ol>
+                    <div class="carousel-inner">
+                      <% @listing.images.limit(1).each do |vimage| %>
+                          <div class="item active">
+                            <div><%= image_tag(vimage.photo.url(:medium), class: "img-responsive")%></div>
+                          </div>
+                      <% end %>
+
+                      <% @listing.images.each_with_index do |item, index| %>
+                        <%  if index != 0 %>
+                              <div class="item">
+                                <div><%= image_tag(item.photo.url(:medium), class: "img-responsive")%></div>
+                              </div>
+                         <% end%>
+                      <% end %>
+                    </div>
+                    <a class="left carousel-control" href="#slider-property" data-slide="prev">
+                      <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#slider-property" data-slide="next">
+                      <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                  </div>
+
+                  <h3>Résumé</h3>
+                    <div class="justify">
+                      <p><%= simple_format(@listing.summary) %></p>
+                    </div>
+
+
+                  <h3>Localisation</h3>
+                  <div id="map-property"></div>
+
+                  <h3>Description</h3>
+
+                  <div class="justify">
+                    <p><%= simple_format(@listing.description) %></p>
+                  </div>
+
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end:article -->

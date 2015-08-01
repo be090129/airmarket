@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "about" => "pages#about"
   get "listings-list" => "listings#index2"
   get "manage-listings" => "listings#managelistings"
-  get 'manage-listings/:id' => 'listings#edit', as: :edit
+  get 'manage-listings/:id' => 'listings#edit', as: :modification
 
 
   # The priority is based upon order of creation: first created -> highest priority.

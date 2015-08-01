@@ -1,20 +1,12 @@
-<p id="notice"><%= notice %></p>
+<%= render "listings/show/header_detail" %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @listing.name %>
-</p>
+<div id="content">
+  <div class="container">
+    <div class="row">
+      <%= render "listings/show/detail" %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @listing.description %>
-</p>
+      <%= render "listings/show/sidebar" %>
+    </div>
+  </div>
+</div>
 
-<% @listing.images.each do |vimage| %>
-    <div><%= image_tag(vimage.photo.url(:medium), class: "img-responsive")%></div>
-<% end %>
-
-<% if @listing.user == current_user %>
-    <%= link_to 'Edit', edit_listing_path(@listing) %> |
-<% end %>
-<%= link_to 'Back', listings_path %>
