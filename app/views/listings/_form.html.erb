@@ -16,6 +16,10 @@
       <%= f.text_field :name, class: "form-control" %>
     </div>
     <div class="form-group">
+      <%= f.label :listing_price_standard, "Prix de base (en €)" %>
+      <%= f.number_field :listing_price_standard, class: "form-control" %>
+    </div>
+    <div class="form-group">
       <%= f.label :summary, "Résumé (255 caractères max.)" %>
       <%= f.text_area :summary, autofocus: true, class: "form-control",:rows => 3 %>
     </div>
