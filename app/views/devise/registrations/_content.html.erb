@@ -25,8 +25,10 @@
 
             <div class="row" id="adresse">
               <div class="col-xs-6">
-                <%= f.label :birthday, "Date d'anniversaire (jj/mm/aaa)" %>
-                <%= f.date_field :birthday, class: "form-control", :autofocus => true %>
+                <div class="input-group date">
+                  <%= f.label :birthday, "Date d'anniversaire (jj/mm/aaa)" %>
+                  <%= f.date_field :birthday, class: "form-control"%>
+                </div>
               </div>
               <div class="col-xs-6">
                 <%= f.label :nationality, "Nationalité" %>
@@ -116,3 +118,8 @@
 
       </div>
 
+<script>
+    $('#sandbox-container .input-group.date').datepicker({
+        format: "dd/mm/yyyy"
+    });
+</script>

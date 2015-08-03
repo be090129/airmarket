@@ -19,7 +19,9 @@ gem 'jquery-turbolinks'
 gem 'aws-sdk', '< 2.0'
 gem "font-awesome-rails"
 gem 'masonry-rails'
+gem 'bootstrap-datepicker-rails'
 gem 'country_select', github: 'stefanpenner/country_select'
+
 
 
 group :development, :test do
