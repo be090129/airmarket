@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_filter :load_post
   before_action :authenticate_user!
 
   # GET /orders
@@ -27,6 +28,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
+    @order = @listing.orders.build(order_params)
     @listing = Listing.find(params[:listing_id])
     @seller = @listing.user
 
@@ -36,7 +38,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to root_url, notice: 'Order was successfully created.' }
+        format.html { redirect_to listing_path(@listing), notice: 'Order was successfully created.' }
       else
         format.html { render :new }
       end
@@ -68,6 +70,10 @@ class OrdersController < ApplicationController
   end
 
   private
+    def load_post
+      @listing = Listing.find(params[:listing_id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])

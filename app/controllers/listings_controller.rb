@@ -2,7 +2,9 @@ class ListingsController < ApplicationController
 
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :index2, :show]
+
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :maj_user, only: [:new]
 
 
   # GET /listings
@@ -22,11 +24,12 @@ class ListingsController < ApplicationController
   # GET /listings/1
   # GET /listings/1.json
   def show
+    @listing=Listing.find(params[:id])
+    @order = @listing.orders.new
   end
 
   # GET /listings/new
   def new
-
     @listing = current_user.listings.build
   end
 
@@ -82,14 +85,13 @@ class ListingsController < ApplicationController
     end
 
     def maj_user
-      # encoding: utf-8
       @user = current_user
-      @error_message = "Merci de mettre à jour votre profil"
+      @error_message = "Merci de mettre a jour votre profil et de remplir tous les champs vides."
       if @user.iban.empty?
         redirect_to edit_user_registration_path, notice:  @error_message
       elsif @user.bic.empty?
         redirect_to edit_user_registration_path, notice:  @error_message
-      elsif @user.birthday.empty?
+      elsif @user.birthday.nil?
         redirect_to edit_user_registration_path, notice:  @error_message
       elsif @user.adressline1.empty?
         redirect_to edit_user_registration_path, notice:  @error_message
