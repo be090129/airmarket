@@ -30,7 +30,7 @@
               </div>
               <div class="col-xs-6">
                 <%= f.label :nationality, "Nationalité" %>
-                <%= f.text_field :nationality, class: "form-control", :autofocus => true %>
+                <%= f.country_select :nationality, ["France"], {}, { :class => "form-control" } %>
               </div>
             </div><br />
 
@@ -55,11 +55,11 @@
               </div>
             </div>
 
-            <div class="row" id="mdp">
+            <div class="row" id="bank">
 
               <div class="col-xs-6">
                 <%= f.label :country, "Pays" %>
-                <%= f.text_field :country, class: "form-control" %>
+                <%= f.country_select :country, ["France"], {}, { :class => "form-control" } %>
               </div>
               <div class="col-xs-6">
                 <%= f.label :region, "Région si US ou CA" %>
@@ -67,7 +67,23 @@
               </div>
             </div>
 
-            <hr >
+            <hr>
+
+            <h2>Compte Bancaire</h2>
+
+            <div class="row" id="mdp">
+
+              <div class="col-xs-8">
+                <%= f.label :iban, "IBAN" %>
+                <%= f.text_field :iban, class: "form-control" %>
+              </div>
+              <div class="col-xs-4">
+                <%= f.label :bic, "BIC" %>
+                <%= f.text_field :bic, class: "form-control" %>
+              </div>
+            </div>
+
+            <hr>
 
             <h2 id="valider">Modifiez votre mot de passe</h2>
 
@@ -80,7 +96,7 @@
 
             <hr>
 
-            <h2>Valider vos modifications</h2>
+            <h2>Validez vos modifications</h2>
 
             <div class="form-group">
               <%= f.label :current_password, "Mot de passe actuel" %> <i>(Nous avons besoin de votre mot de passe actuel pour effectuer la modification)</i>
@@ -94,7 +110,7 @@
 
         <hr>
 
-        <h3>Supprimer votre compte</h3>
+        <h3>Supprimez votre compte</h3>
 
         <p>Quel dommage ! Contactez-nous avant de supprimer votre compte. <%= button_to "Supprimer votre compte", registration_path(resource_name), :data => { :confirm => "Quel dommage !!!" }, :method => :delete, class: "btn btn-warning" %></p>
 
