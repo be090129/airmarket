@@ -1,4 +1,5 @@
 class ListingsController < ApplicationController
+
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :index2, :show]
   before_action :correct_user, only: [:edit, :update, :destroy]
@@ -25,6 +26,7 @@ class ListingsController < ApplicationController
 
   # GET /listings/new
   def new
+
     @listing = current_user.listings.build
   end
 
@@ -41,10 +43,8 @@ class ListingsController < ApplicationController
     respond_to do |format|
       if @listing.save
         format.html { redirect_to manage_listings_path, notice: 'Listing was successfully created.' }
-        format.json { render :show, status: :created, location: @listing }
       else
         format.html { render :new }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -55,10 +55,8 @@ class ListingsController < ApplicationController
     respond_to do |format|
       if @listing.update(listing_params)
         format.html { redirect_to manage_listings_path, notice: 'Listing was successfully updated.' }
-        format.json { render :show, status: :ok, location: @listing }
       else
         format.html { render :edit }
-        format.json { render json: @listing.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -69,7 +67,6 @@ class ListingsController < ApplicationController
     @listing.destroy
     respond_to do |format|
       format.html { redirect_to manage_listings_path, notice: 'Listing was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -84,8 +81,31 @@ class ListingsController < ApplicationController
       redirect_to listings_path, notice: "Not authorized to edit this listing" if @listing.nil?
     end
 
+    def maj_user
+      # encoding: utf-8
+      @user = current_user
+      @error_message = "Merci de mettre à jour votre profil"
+      if @user.iban.empty?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      elsif @user.bic.empty?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      elsif @user.birthday.empty?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      elsif @user.adressline1.empty?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      elsif @user.city.empty?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      elsif @user.country.empty?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      elsif @user.postalcode.empty?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      elsif @user.nationality.empty?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:name, :summary,:description,:listing_price_standard, :images_attributes => [:id, :_destroy, :photo, :listing_id])
+      params.require(:listing).permit(:name, :summary,:description, :images_attributes => [:id, :_destroy, :photo, :listing_id])
     end
 end

@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
 
   devise_for :users, path_names: {sign_in: "login"}
-  resources :listings
+  resources :listings do
+    resources :orders
+  end
   resources :images
   root 'pages#home'
 
