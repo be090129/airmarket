@@ -1,0 +1,37 @@
+<%# encoding: utf-8 %>
+
+
+<!-- begin:article -->
+<div class="col-md-9 col-md-push-3" >
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-xs-9">
+          <h4><%= @order.listing.name %></h4>
+          <p><%= @order.start_date.strftime("%d %B %Y") %> au <%= @order.end_date.strftime("%d %B %Y") %></p>
+        </div>
+        <div class="col-xs-3 text-right">
+          <span class="label label-success">Acceptée</span>
+          <h2><%= @order.order_price %> €</h2>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="col-xs-6">
+
+      </div>
+      <div class="col-xs-6  text-right">
+        <% if @order.buyer_id == current_user.id %>
+            <%= link_to "Annulée", sales_path, {:class => "btn btn-danger"} %>
+        <% elsif @order.seller_id == current_user.id %>
+            <%= link_to "Acceptée", sales_path, {:class => "btn btn-success"} %>
+            <%= link_to "Réfusée", sales_path, {:class => "btn btn-danger"} %>
+
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end:article -->
+
+

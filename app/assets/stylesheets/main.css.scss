@@ -1318,6 +1318,15 @@ input[type="color"]:focus,
   font-size: 14px;
 }
 
+.sidebar .widget p, h5 {
+  padding-left: 10px;
+}
+
+.panel p, h2 {
+  padding-left: 10px;
+}
+
+
 /* special widget */
 .advance-search::before,
 .advance-search::after{

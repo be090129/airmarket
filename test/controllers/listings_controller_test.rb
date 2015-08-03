@@ -25,7 +25,7 @@ class ListingsControllerTest < ActionController::TestCase
   end
 
   test "should show listing" do
-    get :show, id: @listing
+    get :edit, id: @listing
     assert_response :success
   end
 

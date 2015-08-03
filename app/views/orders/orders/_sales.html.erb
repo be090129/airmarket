@@ -1,0 +1,54 @@
+<%# encoding: utf-8 %>
+
+<div class="col-md-9 col-md-push-3" >
+    <div class="panel">
+      <div class="panel-header">
+        <div class="row row-table">
+          <div class="col-md-6 ">
+            <h2>Vos ventes</h2>
+          </div>
+
+          <div class="col-md-6 ">
+            <div class="form-group">
+              <label for="sel1">Filtre</label>
+              <select class="form-control" id="sel1">
+                <option>Toutes</option>
+                <option>En attente</option>
+                <option>Acceptée</option>
+                <option>Réfusée</option>
+                <option>Expirée</option>
+                <option>Validée</option>
+                <option></option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table panel-body space-1" style="background-color:white">
+          <tbody>
+            <tr>
+                <th>Statut</th>
+                <th>Dates et lieu</th>
+                <th>Voyageur</th>
+                <th>Détails</th>
+                <th></th>
+            </tr>
+                <% @orders.each do |order| %>
+                  <tr>
+                    <td class="center"><span class="label label-success">Acceptée</span></td>
+                    <td class="center">
+                      <p><%= link_to  order.listing.name, listing_path(order.listing_id), target: '_blank' %></p>
+                      <p><%= order.start_date.strftime("%d %B %Y") %> au <%= order.end_date.strftime("%d %B %Y")  %> </p>
+                    </td>
+                    <td class="center"><%= order.buyer.first_name %></td>
+                    <td class="center"><%= number_to_currency(order.order_price, unit: "€", format: "%n %u") %></td>
+                    <td class="center"><%= link_to "Visualiser", edit_listing_order_path(order.listing_id, order.id) %></td>
+                  </tr>
+              <% end %>
+            </tbody>
+        </table>
+      </div>
+    </div>
+</div>

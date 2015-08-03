@@ -25,7 +25,7 @@ class OrdersControllerTest < ActionController::TestCase
   end
 
   test "should show order" do
-    get :show, id: @order
+    get :edit, id: @order
     assert_response :success
   end
 

@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get "manage-listings" => "listings#managelistings"
   get 'manage-listings/:id' => 'listings#edit', as: :modification
 
+  get 'sales' => "orders#sales"
+  get 'purchases' => "orders#purchases"
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -2,7 +2,7 @@
 
   <div class="field">
     <%= f.label :start_date %><br>
-    <%= f.date_select :start_date %>
+    <%= f.date_select :start_date, :as => :string, :input_html => {:class => 'datepicker col-span-3'} %>
   </div>
   <div class="field">
     <%= f.label :end_date %><br>
@@ -11,8 +11,8 @@
   <div class="field">
     <%= f.label :order_price %><br>
     <%= f.number_field :order_price %>
-  </div>
+  </div><br />
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Envoyez une demande", class: "btn btn-success" %>
   </div>
 <% end %>
