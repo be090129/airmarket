@@ -43,6 +43,7 @@ class OrdersController < ApplicationController
     @order.seller_id = @seller.id
     @order.listing_id = @listing.id
     @order.buyer_id = current_user.id
+    @order.status = "En attente"
 
     respond_to do |format|
       if @order.save
@@ -89,6 +90,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id )
+      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message )
     end
 end

@@ -1,0 +1,18 @@
+<%# encoding: utf-8 %>
+
+
+<% if order.status == "En attente" %>
+    <span class="label label-warning"><%= order.status if order.status%></span>
+<% elsif order.status == "Validée" %>
+    <span class="label label-success"><%= order.status if order.status%></span>
+<% elsif order.status == "Payée" %>
+    <span class="label label-success"><%= order.status if order.status%></span>
+<% elsif order.status == "Annulée" %>
+    <span class="label label-danger"><%= order.status if order.status%></span>
+<% elsif order.status == "Refusée" %>
+    <span class="label label-danger"><%= order.status if order.status%></span>
+<% elsif order.status == "Expirée" %>
+    <span class="label label-danger"><%= order.status if order.status%></span>
+<% else %>
+    <span class="label label-danger">Pas de statut</span>
+<%end%>

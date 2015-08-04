@@ -37,7 +37,7 @@
             </tr>
                 <% @orders.each do |order| %>
                   <tr>
-                    <td class="center"><span class="label label-success">Acceptée</span></td>
+                    <td class="center"><%= render "orders/status/status", :order => order %></td>
                     <td class="center">
                       <p><%= link_to  order.listing.name, listing_path(order.listing_id), target: '_blank' %></p>
                       <p><%= order.start_date.strftime("%d %B %Y") %> au <%= order.end_date.strftime("%d %B %Y")  %> </p>

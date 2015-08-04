@@ -1,20 +1,36 @@
 <%# encoding: utf-8 %>
 
+<%# encoding: utf-8 %>
+
+
 <!-- begin:sidebar -->
 <div class="col-md-3 col-md-pull-9 sidebar">
   <div class="widget widget-sidebar widget-white">
+
     <div class="widget-header">
-      <h3>Profil</h3>
+      <% if @order.buyer_id == current_user.id %>
+          <h3>Profil de l'acheteur</h3>
+      <% elsif @order.seller_id == current_user.id %>
+          <h3>Profil du vendeur</h3>
+      <%end%>
     </div>
 
     <div class="row">
-        <h5><%= @order.buyer.first_name %></h5>
+      <% if @order.buyer_id == current_user.id %>
+          <h5><%= @order.seller.first_name %></h5>
+      <% elsif @order.seller_id == current_user.id %>
+          <h5><%= @order.buyer.first_name %></h5>
+      <%end%>
     </div>
 
     <div class="row">
-      <p><%= @order.buyer.city %>, <%= @order.buyer.country %> </p>
-      <p>Membre depuis <%= @order.buyer.created_at.strftime("%Y") %></p>
-
+      <% if @order.buyer_id == current_user.id %>
+          <p><%= @order.seller.city %>, <%= @order.seller.country %> </p>
+          <p>Membre depuis <%= @order.seller.created_at.strftime("%Y") %></p>
+      <% elsif @order.seller_id == current_user.id %>
+          <p><%= @order.buyer.city %>, <%= @order.buyer.country %> </p>
+          <p>Membre depuis <%= @order.buyer.created_at.strftime("%Y") %></p>
+      <%end%>
     </div>
 
     <div class="row">
@@ -25,10 +41,6 @@
         <%= link_to 'Mes achats', purchases_path %>
       </div>
     </div>
-
-
-
-
 
   </div>
 </div>
