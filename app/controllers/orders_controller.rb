@@ -81,7 +81,7 @@ class OrdersController < ApplicationController
         @order.status = "Payed"
         #autres actions
         @order.save
-        format.html { redirect_to sales_path, notice: 'Payed' }
+        format.html { redirect_to purchases_path, notice: 'Payed' }
       else
         format.html { render :edit }
       end
