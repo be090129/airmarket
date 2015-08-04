@@ -37,7 +37,6 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    @order = @listing.orders.build(order_params)
     @listing = Listing.find(params[:listing_id])
     @seller = @listing.user
 
