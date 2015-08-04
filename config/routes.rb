@@ -9,14 +9,13 @@ Rails.application.routes.draw do
 
   resources :images
 
-
   get "about" => "pages#about"
   get "cancellation" => "pages#cancellation"
 
   get "listings-list" => "listings#index2"
+
   get "manage-listings" => "listings#managelistings"
   get 'manage-listings/:id' => 'listings#edit', as: :modification
-
   get 'sales' => "orders#sales"
   get 'purchases' => "orders#purchases"
 
