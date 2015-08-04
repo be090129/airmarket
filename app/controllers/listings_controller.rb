@@ -10,15 +10,15 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @listings = Listing.all
+    @listings = Listing.all.paginate(:page => params[:page], :per_page => 3)
   end
 
   def index2
-    @listings = Listing.all
+    @listings = Listing.all.paginate(:page => params[:page], :per_page => 3)
   end
 
   def managelistings
-    @listings = current_user.listings.order(:name)
+    @listings = current_user.listings.order(:name).paginate(:page => params[:page], :per_page => 3)
   end
 
   # GET /listings/1

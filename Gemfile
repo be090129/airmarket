@@ -20,6 +20,8 @@ gem 'aws-sdk', '< 2.0'
 gem "font-awesome-rails"
 gem 'masonry-rails'
 gem 'bootstrap-datepicker-rails'
+gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
 gem 'country_select', github: 'stefanpenner/country_select'
 
 
