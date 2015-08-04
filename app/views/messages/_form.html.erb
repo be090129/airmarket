@@ -1,0 +1,16 @@
+<%= form_for([@listing, @order, @message]) do |f| %>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <%= f.text_area :message, autofocus: true, class: "form-control",:rows => 8 %>
+      </div>
+    </div><br />
+
+    <div class="row">
+      <div class="col-xs-12  text-right">
+        <%= f.submit "Envoyez un message", class: "btn btn-primary"  %>
+      </div>
+    </div>
+
+
+<% end %>

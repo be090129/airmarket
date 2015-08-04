@@ -33,6 +33,8 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @listing = Listing.find(params[:listing_id])
+    @message =   Message.new
+    @messages =   Message.all.where(order_id: @order).order("created_at DESC")
   end
 
   # POST /orders

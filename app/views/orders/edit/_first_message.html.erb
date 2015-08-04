@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-xs-2">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h5><%= @order.buyer.first_name %></h5>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-10">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p class="bold"><%= @order.created_at.strftime("%d %B %Y")%></p>
+        <p><%= @order.message if @order.message %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end:article -->
