@@ -1,0 +1,12 @@
+<%# encoding: utf-8 %>
+
+<% if order.status == "Pending" %>
+<% elsif order.status == "Validated" %>
+    <%= submit_tag 'Payer', name: 'payed', :class => "btn btn-success" %>
+    <%= submit_tag 'Annuler', name: 'cancelled',:class => "btn btn-danger" %>
+<% elsif order.status == "Payed" %>
+    <%= submit_tag 'Annuler', name: 'cancelled',:class => "btn btn-danger" %>
+<% elsif order.status == "Cancelled" %>
+<% elsif order.status == "Refused" %>
+<% elsif order.status == "Expired" %>
+<%end%>

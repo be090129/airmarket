@@ -31,6 +31,8 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    @order = Order.find(params[:id])
+    @listing = Listing.find(params[:listing_id])
   end
 
   # POST /orders
@@ -43,7 +45,7 @@ class OrdersController < ApplicationController
     @order.seller_id = @seller.id
     @order.listing_id = @listing.id
     @order.buyer_id = current_user.id
-    @order.status = "En attente"
+    @order.status = "Pending"
 
     respond_to do |format|
       if @order.save
@@ -57,15 +59,34 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
+    @order = Order.find(params[:id])
+
     respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
-        format.json { render :show, status: :ok, location: @order }
+      if params[:validated]
+        @order.status = "Validated"
+        #autres actions
+        @order.save
+        format.html { redirect_to sales_path, notice: 'Validated' }
+      elsif params[:refused]
+        @order.status = "Refused"
+        #autres actions
+        @order.save
+        format.html { redirect_to sales_path, notice: 'Refused' }
+      elsif params[:cancelled]
+        @order.status = "Cancelled"
+        #autres actions
+        @order.save
+        format.html { redirect_to cancellation_path, notice: 'Cancelled' }
+      elsif params[:payed]
+        @order.status = "Payed"
+        #autres actions
+        @order.save
+        format.html { redirect_to sales_path, notice: 'Payed' }
       else
         format.html { render :edit }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # DELETE /orders/1

@@ -1,17 +1,14 @@
 <%# encoding: utf-8 %>
 
-<%# encoding: utf-8 %>
-
-
 <!-- begin:sidebar -->
 <div class="col-md-3 col-md-pull-9 sidebar">
   <div class="widget widget-sidebar widget-white">
 
     <div class="widget-header">
       <% if @order.buyer_id == current_user.id %>
-          <h3>Profil de l'acheteur</h3>
-      <% elsif @order.seller_id == current_user.id %>
           <h3>Profil du vendeur</h3>
+      <% elsif @order.seller_id == current_user.id %>
+          <h3>Profil de l'acheteur</h3>
       <%end%>
     </div>
 

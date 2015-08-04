@@ -3,4 +3,7 @@ class PagesController < ApplicationController
   end
   def about
   end
+
+  def cancellation
+  end
 end

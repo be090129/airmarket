@@ -1,14 +1,18 @@
 Rails.application.routes.draw do
 
+  root 'pages#home'
 
   devise_for :users, path_names: {sign_in: "login"}
   resources :listings do
     resources :orders
   end
+
   resources :images
-  root 'pages#home'
+
 
   get "about" => "pages#about"
+  get "cancellation" => "pages#cancellation"
+
   get "listings-list" => "listings#index2"
   get "manage-listings" => "listings#managelistings"
   get 'manage-listings/:id' => 'listings#edit', as: :modification
