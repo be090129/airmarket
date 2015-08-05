@@ -39,7 +39,7 @@
 	[10. FOOTER]
 	[11. COPYRIGHT]
 	[12. USER]
-
+    [13. MAP]
 
 */
 
@@ -2203,6 +2203,14 @@ input[type="color"]:focus,
 .center {
   text-align :center;
 }
+
+/*
+	==================
+	[13. MAP]
+	==================
+*/
+
+
 
 #gmaps-canvas {
   height: 400px;
