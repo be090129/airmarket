@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   devise_for :users, path_names: {sign_in: "login"}
+
   resources :listings do
     resources :orders do
       resources :messages

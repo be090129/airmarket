@@ -33,12 +33,11 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @listing = Listing.find(params[:listing_id])
-    @message =   Message.new
     @messages =   Message.all.where(order_id: @order).order("created_at DESC")
+
+    @message =   @order.messages.new
   end
 
-  # POST /orders
-  # POST /orders.json
   def create
     @order = Order.new(order_params)
     @listing = Listing.find(params[:listing_id])
@@ -49,17 +48,16 @@ class OrdersController < ApplicationController
     @order.buyer_id = current_user.id
     @order.status = "Pending"
 
+
     respond_to do |format|
       if @order.save
         format.html { redirect_to listing_path(@listing), notice: 'Order was successfully created.' }
       else
-        format.html { render :new }
+        format.html { redirect_to listing_path(@listing), notice: 'Nous avons un probleme technique' }
       end
     end
   end
 
-  # PATCH/PUT /orders/1
-  # PATCH/PUT /orders/1.json
   def update
     @order = Order.find(params[:id])
 
@@ -88,11 +86,8 @@ class OrdersController < ApplicationController
         format.html { render :edit }
       end
     end
-
   end
 
-  # DELETE /orders/1
-  # DELETE /orders/1.json
   def destroy
     @order.destroy
     respond_to do |format|

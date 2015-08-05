@@ -1,7 +1,8 @@
 <%# encoding: utf-8 %>
-<%= form_for([@listing, @order]) do |f| %>
+
     <!-- begin:article -->
-    <div class="col-md-9 col-md-push-3" >
+<div class="col-md-9 col-md-push-3" >
+  <%= form_for([@listing, @order]) do |f| %>
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="row">
@@ -27,12 +28,12 @@
           </div>
         </div>
       </div>
-<%end%>
+  <%end%>
 
-        <%= render "orders/edit/new_message" %>
+  <%= render "orders/edit/new_message" %>
 
-        <%= render "orders/edit/index_message" %>
+  <%= render "orders/edit/index_message" %>
 
-        <%= render "orders/edit/first_message" %>
+  <%= render "orders/edit/first_message" %>
 
-    </div>
+</div>
