@@ -22,6 +22,7 @@ gem 'masonry-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'will_paginate', '~> 3.0.6'
 gem 'will_paginate-bootstrap'
+gem 'simple_form'
 gem 'country_select', github: 'stefanpenner/country_select'
 
 

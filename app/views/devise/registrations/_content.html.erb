@@ -132,7 +132,7 @@
 
         <h3>Supprimez votre compte</h3>
 
-        <p>Quel dommage ! Contactez-nous avant de supprimer votre compte. <%= button_to "Supprimer votre compte", registration_path(resource_name), :data => { :confirm => "Quel dommage !!!" }, :method => :delete, class: "btn btn-warning" %></p>
+        <p>Quel dommage ! Contactez-nous avant de supprimer votre compte. <%= link_to "Supprimer mon compte", registration_path(resource_name), :data => { :confirm => "Quel dommage !!!" }, :method => :delete %></p>
 
       </div>
 

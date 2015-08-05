@@ -1,6 +1,6 @@
 <div class="col-md-9 col-md-push-3" >
 
-    <%= form_for @listing, html: { multipart: true } do |f| %>
+    <%= simple_form_for @listing, html: { multipart: true } do |f| %>
 
       <h3>Description</h3><hr>
 
@@ -26,18 +26,7 @@
           </div>
 
       <hr><h3>Localisation</h3><hr>
-
-          <div id='input'>
-            <input id='gmaps-input-address' placeholder='Start typing a place name...' type='text' />
-            <br/>
-            <br/>
-            Latitude: <span id='gmaps-output-latitude'></span>
-            <br/>
-            Longitude: <span id='gmaps-output-longitude'></span>
-            <br/>
-
-            <div id='gmaps-error'></div>
-          </div>
+      <%= f.input @address, :input_html =>{:id => 'gmaps-input-address'}, :placeholder => 'Start typing a place name...' %>
 
           <div id='gmaps-canvas'></div>
 
