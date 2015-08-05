@@ -1,0 +1,23 @@
+<%# encoding: utf-8 %>
+
+<% if order.status == "Pending" %>
+    <p>Bonjour <%= order.seller.first_name %>,</p>
+    <p>Vous avez 3 possibilités :</p>
+    <p>- pré-approuver la vente : <%= order.buyer.first_name %> pourra procéder au paiement</p>
+    <p>- refuser la vente</p>
+    <p>- envoyer un message ci-dessous pour avoir plus d'informations avant de pré-approuver ou de refuser la vente</p>
+<% elsif order.status == "Validated" %>
+    <p>Bonjour <%= order.seller.first_name %>,</p>
+    <p><%= order.buyer.first_name %> va effectuer le paiement pour confirmer sa réservation.</p>
+    <p>Bonne journée</p>
+<% elsif order.status == "Payed" %>
+    <h3>Détail de la vente</h3>
+    <p><b>Prénom :</b> <%= order.buyer.first_name %></p>
+    <p><b>Nom :</b> <%= order.buyer.last_name %></p>
+    <p><b>Email :</b> <%= order.buyer.email %></p>
+    <p>Merci de prendre contact directement avec <%= order.buyer.first_name %> pour les dernières modalités.</p>
+<% elsif order.status == "Cancelled" %>
+    <p>Merci de prendre contact avec nos équipes.</p>
+<% elsif order.status == "Refused" %>
+<% elsif order.status == "Expired" %>
+<%end%>
