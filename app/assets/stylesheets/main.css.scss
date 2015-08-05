@@ -2203,3 +2203,19 @@ input[type="color"]:focus,
 .center {
   text-align :center;
 }
+
+#gmaps-canvas {
+  height: 400px;
+  border: 1px solid #999;
+  -moz-box-shadow:    0px 0px 5px #ccc;
+  -webkit-box-shadow: 0px 0px 5px #ccc;
+  box-shadow:         0px 0px 5px #ccc;
+}
+
+#gmaps-error {
+  color: #cc0000;
+}
+
+#gmaps-input-address {
+  banckground-color : #fff;
+}

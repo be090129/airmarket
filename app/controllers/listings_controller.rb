@@ -38,6 +38,8 @@ class ListingsController < ApplicationController
 
   end
 
+
+
   # POST /listings
   # POST /listings.json
   def create
@@ -55,6 +57,8 @@ class ListingsController < ApplicationController
   # PATCH/PUT /listings/1
   # PATCH/PUT /listings/1.json
   def update
+    @listing = Listing.find(params[:id])
+
     respond_to do |format|
       if @listing.update(listing_params)
         format.html { redirect_to manage_listings_path, notice: 'Listing was successfully updated.' }
@@ -108,6 +112,6 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:name, :summary,:description, :images_attributes => [:id, :_destroy, :photo, :listing_id])
+      params.require(:listing).permit(:name, :summary,:description,:address,:country, :latitude, :longitude,  :images_attributes => [:id, :_destroy, :photo, :listing_id])
     end
 end

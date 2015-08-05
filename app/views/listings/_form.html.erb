@@ -26,8 +26,15 @@
           </div>
 
       <hr><h3>Localisation</h3><hr>
-      <%= f.input @address, :input_html =>{:id => 'gmaps-input-address'}, :placeholder => 'Start typing a place name...' %>
-
+          <div class="row">
+            <div class="col-xs-9">
+              <%= f.input :address, :input_html =>{:id => 'gmaps-input-address', class: "form-control", autofocus: true}, :placeholder => 'Commencez à saisir votre addresse', label: "Adresse" %>
+            </div>
+            <div class="col-xs-3">
+              <%= f.label :country, "Pays" %>
+              <%= f.country_select :country, ["France"], {}, { :class => "form-control" } %>
+            </div>
+          </div>
           <div id='gmaps-canvas'></div>
 
       <hr><h3>Photos</h3><hr>
