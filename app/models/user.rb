@@ -10,4 +10,7 @@ class User < ActiveRecord::Base
   has_many :sales, class_name: "Order", foreign_key: "seller_id"
   has_many :purchases, class_name: "Order", foreign_key: "buyer_id"
 
+  has_many :images, :dependent => :destroy
+  accepts_nested_attributes_for :images, :reject_if => lambda { |t| t['photo'].nil? }, allow_destroy: true
+
 end

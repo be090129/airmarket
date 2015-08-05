@@ -11,10 +11,10 @@
 	ARILLO - REAL ESTATE TEMPLATE
 	========================================
 
-	@author			: @avriqq
+	@author			: @roms
 	@version		: v1.1
-	@date-create	: 07/14/2014
-	@last-update	: 07/17/2014
+	@date-create	: 07/14/2015
+	@last-update	: 07/17/2015
 	@file-name		: style
 
 */
@@ -38,6 +38,8 @@
 	[9. PARTNER]
 	[10. FOOTER]
 	[11. COPYRIGHT]
+	[12. USER]
+
 
 */
 
@@ -2173,4 +2175,31 @@ input[type="color"]:focus,
 .copyright .social-links > li > .icon-youtube:hover,
 .copyright .social-links > li > .icon-gplus:hover{
   background: #ff4b4b;
+}
+
+/*
+	==================
+	[12. USER]
+	==================
+*/
+
+.circular {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+}
+
+.user-profile-image {
+
+    padding: 15px 5px !important;
+    margin-right:5px;
+    height:40px;
+    width:40px;
+
+}
+
+.center {
+  text-align :center;
 }

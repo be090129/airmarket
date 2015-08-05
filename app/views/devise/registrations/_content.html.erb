@@ -22,7 +22,7 @@
               <%= f.email_field :email, class: "form-control", :autofocus => true %>
             </div>
 
-            <div class="row" id="adresse">
+            <div class="row">
               <div class="col-xs-6">
                 <div class="input-group date">
                   <%= f.label :birthday, "Date d'anniversaire (jj/mm/aaa)" %>
@@ -32,6 +32,17 @@
               <div class="col-xs-6">
                 <%= f.label :nationality, "Nationalité" %>
                 <%= f.country_select :nationality, ["France"], {}, { :class => "form-control" } %>
+              </div>
+            </div><br />
+
+            <div class="row" id="adresse">
+              <div class="col-xs-12">
+                <%= f.fields_for :images do |builder| %>
+                    <%= render 'image_fields', :f => builder %>
+              <%end%>
+
+              <p><%= link_to_add_fields "Ajouter une photo", f, :images %></p><br />
+
               </div>
             </div><br />
 

@@ -14,9 +14,23 @@
 
     <div class="row">
       <% if @order.buyer_id == current_user.id %>
-          <h5><%= @order.seller.first_name %></h5>
+          <div class="col-xs-12">
+              <%@order.seller.images.limit(1).each do |vimage| %>
+                    <%= image_tag(vimage.photo.url(:thumb), class: "img-responsive") if !vimage.nil?%>
+              <% end %>
+          </div><br />
+          <div class="col-xs-12">
+            <h4><%= @order.seller.first_name %></h4>
+          </div>
       <% elsif @order.seller_id == current_user.id %>
-          <h5><%= @order.buyer.first_name %></h5>
+          <div class="col-xs-12">
+            <%@order.buyer.images.limit(1).each do |vimage| %>
+                <%= image_tag(vimage.photo.url(:thumb), class: "img-responsive") if !vimage.nil?%>
+            <% end %>
+          </div>
+          <div class="col-xs-12">
+            <h4><%= @order.buyer.first_name %></h4>
+          </div>
       <%end%>
     </div>
 

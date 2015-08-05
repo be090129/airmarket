@@ -21,11 +21,16 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><%= link_to "A propos", about_path %></li>
-
           </ul>
         </li>
 
         <% if user_signed_in? %>
+            <% current_user.images.limit(1).each do |vimage| %>
+                <li class="user-profile-image">
+                  <%= image_tag(vimage.photo.url(:avatar), class: "circular") if !vimage.nil?%>
+                </li>
+            <% end %>
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bonjour <%=current_user.first_name%><span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
