@@ -2,22 +2,20 @@
 
   <div class="row">
 
-    <div class="col-md-4">
+    <div class="col-md-7">
       <%= f.label :photo %>
       <%= f.file_field :photo %>
     </div>
 
-    <div class="col-md-2">
-
-      <%= f.label :_destroy, 'Effacer' %><br />
-      <%= f.check_box :_destroy %>
-
-    </div>
-
     <div class="col-md-3">
       <%unless f.object.new_record? %>
-          <%= link_to image_tag(f.object.photo.url(:thumb))%>
+          <%= link_to image_tag(f.object.photo.url(:avatar))%>
       <%end%>
+    </div>
+
+    <div class="col-md-2">
+      <%= f.label :_destroy, 'Effacer' %><br />
+      <%= f.check_box :_destroy %>
     </div>
 
 

@@ -3,13 +3,8 @@
 <div id="content">
   <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-md-8 col-md-offset-2">
-        <h1>Editer l'annonce</h1>
-
-        <%= render 'form' %>
-
-        <%= link_to 'Revenir à mes annonces', manage_listings_path %>
-      </div>
+      <%= render 'form' %>
+      <%= render 'listings/edit/sidebar' %>
     </div>
   </div>
 </div>
