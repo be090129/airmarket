@@ -2,6 +2,7 @@ var geocoder;
 var map;
 var marker;
 
+
 // initialise the google maps objects, and add listeners
 function gmaps_init(){
 

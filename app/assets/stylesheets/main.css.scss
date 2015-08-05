@@ -2214,7 +2214,7 @@ input[type="color"]:focus,
 
 #gmaps-canvas {
   height: 400px;
-  border: 1px solid #999;
+  border: 1px solid #998;
   -moz-box-shadow:    0px 0px 5px #ccc;
   -webkit-box-shadow: 0px 0px 5px #ccc;
   box-shadow:         0px 0px 5px #ccc;
@@ -2226,4 +2226,8 @@ input[type="color"]:focus,
 
 #gmaps-input-address {
   banckground-color : #fff;
+}
+
+.ui-autocomplete-input {
+  background-color: #fff;
 }

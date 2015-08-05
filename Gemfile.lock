@@ -208,6 +208,7 @@ DEPENDENCIES
   bootstrap-sass
   coffee-rails (~> 4.1.0)
   coffee-script-source (= 1.8.0)
+  countries
   country_select!
   devise
   font-awesome-rails

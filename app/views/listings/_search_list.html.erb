@@ -17,8 +17,7 @@
                     <%= image_tag(vimage.photo.url(:medium), class: "img-responsive")%>
                 <% end %>
                 <div class="property-price">
-                  <h4>A partir de</h4>
-                  <span>250 €<small>/nuit</small></span>
+                  <span><%= listing.listing_price_standard %> €</span>
                 </div>
 
                 <div class="property-features">
