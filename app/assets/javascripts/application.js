@@ -11,12 +11,12 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery_nested_form
 //= require jquery-ui
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require bootstrap
 //= require gmaps.js
-//= require jquery_nested_form
 //= require masonry/jquery.masonry
 //= require masonry/jquery.imagesloaded.min
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
