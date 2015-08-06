@@ -26,9 +26,6 @@ gem 'simple_form'
 gem 'country_select', github: 'stefanpenner/country_select'
 gem 'countries'
 gem 'geocoder'
-gem 'jquery-migrate-rails'
-
-
 
 group :development, :test do
   gem 'sqlite3'
