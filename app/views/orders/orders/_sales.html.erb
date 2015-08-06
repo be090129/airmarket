@@ -8,18 +8,21 @@
             <h2>Mes ventes</h2>
           </div>
 
-          <div class="col-md-6 ">
+          <div class="col-md-6 text-right">
             <div class="form-group">
-              <label for="sel1">Filtre</label>
-              <select class="form-control" id="sel1">
-                <option>Toutes</option>
-                <option>En attente</option>
-                <option>Acceptée</option>
-                <option>Réfusée</option>
-                <option>Expirée</option>
-                <option>Validée</option>
-                <option></option>
-              </select>
+              <label for="sel1"></label>
+
+              <%= search_form_for @q, url: sales_path do |f| %>
+                  <div class="col-xs-12 col-md-6">
+                    <%= f.select(:status_eq, [['En attente', "Pending"], ['Validée', "Validated"], ['Réservée', "Payed"], ['Annulée', "Cancelled"], ['Refusée', "Refused"], ['Expirée', "Expired"]],{}, {class: "form-control"}) %>
+                  </div>
+                  <div class="col-xs-12 col-md-3">
+                    <%= f.submit 'Rechercher', class: "btn btn-success" %>
+                  </div>
+                  <div class="col-xs-12 col-md-3">
+                    <%= link_to 'Annuler', sales_path, class: "btn btn-danger" %>
+                  </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -49,6 +52,11 @@
               <% end %>
             </tbody>
         </table>
+
+        <div class="center">
+          <%= will_paginate @orders, renderer: BootstrapPagination::Rails, :previous_label => 'Précédent', :next_label => 'Suivant' %>
+        </div>
+
       </div>
     </div>
 </div>

@@ -11,10 +11,20 @@ class OrdersController < ApplicationController
 
   def sales
     @orders = Order.all.where(seller: current_user).order("created_at DESC")
+    @q = Order.ransack(params[:q])
+    @orders = @q.result(distinct: true).where(seller: current_user).order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
+    respond_to do |format|
+      format.html
+    end
   end
 
   def purchases
     @orders = Order.all.where(buyer: current_user).order("created_at DESC")
+    @q = Order.ransack(params[:q])
+    @orders = @q.result(distinct: true).where(buyer: current_user).order("created_at DESC").paginate(:page => params[:page], :per_page => 5)
+    respond_to do |format|
+      format.html
+    end
   end
 
   # GET /orders/1

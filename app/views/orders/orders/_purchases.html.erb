@@ -8,12 +8,20 @@
           <h2>Mes achats</h2>
         </div>
 
-        <div class="col-md-6 ">
+        <div class="col-md-6 text-right">
           <div class="form-group">
-            <label for="sel1">Filtre</label>
-            <%= form_tag purchases_path, method: 'get' do %>
-                <%= select_tag "Statuts", options_for_select(@orders.status) %>
-                <%= submit_tag 'Filter' %>
+            <label for="sel1"></label>
+
+            <%= search_form_for @q, url: purchases_path do |f| %>
+                <div class="col-xs-12 col-md-6">
+                    <%= f.select(:status_eq, [['En attente', "Pending"], ['Validée', "Validated"], ['Réservée', "Payed"], ['Annulée', "Cancelled"], ['Refusée', "Refused"], ['Expirée', "Expired"]],{}, {class: "form-control"}) %>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <%= f.submit 'Rechercher', class: "btn btn-success" %>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                  <%= link_to 'Annuler', purchases_path, class: "btn btn-danger" %>
+                </div>
             <% end %>
           </div>
         </div>
@@ -44,6 +52,11 @@
         <% end %>
         </tbody>
       </table>
+
+      <div class="center">
+        <%= will_paginate @orders, renderer: BootstrapPagination::Rails, :previous_label => 'Précédent', :next_label => 'Suivant' %>
+      </div>
+
     </div>
   </div>
 </div>
