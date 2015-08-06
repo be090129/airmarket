@@ -16,6 +16,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'paperclip', '~> 4.2'
 gem 'jquery-turbolinks'
+gem 'jquery-ui-rails'
 gem 'aws-sdk', '< 2.0'
 gem "font-awesome-rails"
 gem 'masonry-rails'
