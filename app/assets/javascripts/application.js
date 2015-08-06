@@ -13,10 +13,10 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require jquery.turbolinks
+/*//= require jquery.turbolinks*/
 //= require bootstrap-sprockets
 //= require masonry/jquery.masonry
 //= require masonry/jquery.imagesloaded.min
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
-//= require turbolinks
+/*//= require turbolinks */
 //= require_tree .
