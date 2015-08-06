@@ -39,7 +39,7 @@
         <div class="form-group">
           <%= f.fields_for :images do |builder| %>
               <%= render 'image_fields', :f => builder %>
-          <%end%>
+          <%end%><br />
 
           <p><%= f.link_to_add "Ajouter une photo", :images %></p><br />
         </div>

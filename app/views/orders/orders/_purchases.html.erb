@@ -11,14 +11,10 @@
         <div class="col-md-6 ">
           <div class="form-group">
             <label for="sel1">Filtre</label>
-            <select class="form-control" id="sel1">
-              <option>Toutes</option>
-              <option>En attente</option>
-              <option>Acceptée</option>
-              <option>Réfusée</option>
-              <option>Expirée</option>
-              <option>Validée</option>
-            </select>
+            <%= form_tag purchases_path, method: 'get' do %>
+                <%= select_tag "Statuts", options_for_select(@orders.status) %>
+                <%= submit_tag 'Filter' %>
+            <% end %>
           </div>
         </div>
       </div>
