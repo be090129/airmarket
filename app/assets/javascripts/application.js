@@ -10,11 +10,11 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require jquery
 //= require jquery-ui
 //= require jquery_ujs
-//= require jquery.turbolinks
 //= require bootstrap-sprockets
-//= require jquery
+//= require jquery.turbolinks
 //= require masonry/jquery.masonry
 //= require masonry/jquery.imagesloaded.min
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
