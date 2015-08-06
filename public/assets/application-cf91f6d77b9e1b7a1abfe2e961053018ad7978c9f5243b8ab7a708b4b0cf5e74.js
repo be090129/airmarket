@@ -31638,7 +31638,6 @@ $(document).ready(function() {
 	};
 }(jQuery));
 (function() {
-  rake;
   jQuery(function() {
     var regexp, time;
     $('form').on('click', '.remove_fields', function(event) {});
