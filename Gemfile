@@ -12,11 +12,11 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'bootstrap-sass'
 gem 'devise'
 gem 'paperclip', '~> 4.2'
 gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'aws-sdk', '< 2.0'
 gem "font-awesome-rails"
 gem 'masonry-rails'
