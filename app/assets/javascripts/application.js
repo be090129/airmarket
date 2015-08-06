@@ -15,6 +15,7 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require bootstrap
+//= require gmaps.js
 //= require turbolinks
 //= require masonry/jquery.masonry
 //= require masonry/jquery.imagesloaded.min
