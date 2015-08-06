@@ -1,6 +1,6 @@
 <div class="col-md-9 col-md-push-3" >
 
-    <%= simple_form_for @listing, html: { multipart: true } do |f| %>
+    <%= simple_nested_form_for @listing do |f| %>
 
       <h3>Description</h3><hr>
 
@@ -41,7 +41,7 @@
               <%= render 'image_fields', :f => builder %>
           <%end%>
 
-          <p><%= link_to_add_fields "Ajouter une photo", f, :images %></p><br />
+          <p><%= f.link_to_add "Ajouter une photo", :images %></p><br />
         </div>
 
       <hr>

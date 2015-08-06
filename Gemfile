@@ -27,6 +27,7 @@ gem 'simple_form'
 gem 'country_select', github: 'stefanpenner/country_select'
 gem 'countries'
 gem 'geocoder'
+gem "nested_form"
 
 group :development, :test do
   gem 'sqlite3'
