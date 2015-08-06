@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_filter :load_post, only: [:new]
   before_action :authenticate_user!
+  before_action :maj_user, only: [:new, :create]
 
   # GET /orders
   # GET /orders.json
@@ -109,6 +110,24 @@ class OrdersController < ApplicationController
   private
     def load_post
       @listing = Listing.find(params[:listing_id])
+    end
+
+    def maj_user
+      @user = current_user
+      @error_message = "Merci de mettre a jour votre profil et de remplir tous les champs vides."
+      if @user.birthday.nil?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      elsif @user.adressline1.empty?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      elsif @user.city.empty?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      elsif @user.country.empty?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      elsif @user.postalcode.empty?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      elsif @user.nationality.empty?
+        redirect_to edit_user_registration_path, notice:  @error_message
+      end
     end
 
     # Use callbacks to share common setup or constraints between actions.

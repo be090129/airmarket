@@ -268,21 +268,6 @@ input[type="color"]:focus,
   transition: all 0.2s ease-in-out;
 }
 
-.navbar-default .navbar-brand::after{
-  content: "";
-  position: absolute;
-  right: -20px;
-  top: -8px;
-  width: 1px;
-  height: 95px;
-  background: red;
-  -webkit-transform: rotate(30deg);
-  -moz-transform: rotate(30deg);
-  -ms-transform: rotate(30deg);
-  -o-transform: rotate(30deg);
-  transform: rotate(30deg);
-}
-
 .navbar-default .navbar-brand span{
   display: block;
   padding-top: 20px;
@@ -473,6 +458,7 @@ input[type="color"]:focus,
   height: auto;
   padding-top: 70px;
   padding-bottom: 60px;
+  background-image: url('.././images/bg01.jpg');
 }
 
 .quick-search{
