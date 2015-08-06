@@ -11,10 +11,10 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require jquery-migrate-min
+//= require jquery_ujs
 //= require jquery.turbolinks
-//= require bootstrap
+//= require bootstrap-sprockets
 //= require masonry/jquery.masonry
 //= require masonry/jquery.imagesloaded.min
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
