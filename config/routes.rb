@@ -1,20 +1,17 @@
 Rails.application.routes.draw do
 
-
   root 'pages#home'
 
   devise_for :users, controllers: {
-                       sessions: 'users/sessions',
-                      registrations: 'users/registrations'
-                   }
-
+     sessions: 'users/sessions',
+     registrations: 'users/registrations'
+  }
 
   resources :listings do
     resources :orders do
       resources :messages
     end
   end
-
 
   resources :images
 
@@ -27,7 +24,6 @@ Rails.application.routes.draw do
   get 'manage-listings/:id' => 'listings#edit', as: :modification
   get 'sales' => "orders#sales"
   get 'purchases' => "orders#purchases"
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -83,4 +79,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
 end
