@@ -1,0 +1,143 @@
+<%# encoding: utf-8 %>
+      <div class="col-md-9 col-md-push-3" id="info_perso" >
+
+        <%= nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+            <%= devise_error_messages! %>
+
+            <h3>Votre profil</h3>
+
+            <div class="row">
+              <div class="col-xs-6">
+                <%= f.label :first_name, "Votre Prénom" %>
+                <%= f.text_field :first_name, class: "form-control", :autofocus => true %>
+              </div>
+              <div class="col-xs-6">
+                <%= f.label :last_name, "Votre Nom" %>
+                <%= f.text_field :last_name, class: "form-control", :autofocus => true %>
+              </div>
+            </div><br />
+
+            <div class="form-group">
+              <%= f.label :email, "Adresse email" %>
+              <%= f.email_field :email, class: "form-control", :autofocus => true %>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="input-group date">
+                  <%= f.label :birthday, "Date d'anniversaire (jj/mm/aaa)" %>
+                  <%= f.date_field :birthday, class: "form-control"%>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <%= f.label :nationality, "Nationalité" %>
+                <%= f.country_select :nationality, ["France"], {}, { :class => "form-control" } %>
+              </div>
+            </div><br />
+
+            <div class="row" id="adresse">
+              <div class="col-xs-12">
+                <%= f.fields_for :images do |builder| %>
+                    <%= render 'image_fields', :f => builder %>
+              <%end%>
+
+              <p><%= f.link_to_add "Ajouter une photo", :images %></p><br />
+
+              </div>
+            </div><br />
+
+            <hr>
+
+            <h3>Votre adresse</h3>
+
+
+            <div class="form-group">
+              <%= f.label :adressline1, "Adresse" %>
+              <%= f.text_field :adressline1, class: "form-control" %>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-4">
+                <%= f.label :postalcode, "Code postal" %>
+                <%= f.text_field :postalcode, class: "form-control" %>
+              </div>
+              <div class="col-xs-8">
+                <%= f.label :city, "Ville" %>
+                <%= f.text_field :city, class: "form-control" %>
+              </div>
+            </div>
+
+            <div class="row" id="bank">
+              <div class="col-xs-6">
+                <%= f.label :country, "Pays" %>
+                <%= f.country_select :country, ["France"], {}, { :class => "form-control" } %>
+              </div>
+              <div class="col-xs-6">
+                <%= f.label :region, "Région si US ou CA" %>
+                <%= f.text_field :region, class: "form-control" %>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-xs-4">
+                <h3>Compte Bancaire</h3>
+              </div>
+              <div class="col-xs-8">
+               <br />
+                <p>Merci de remplir ce champ seulement si vous souhaitez déposer une annonce.</p>
+              </div>
+            </div>
+
+
+            <div class="row" id="mdp">
+
+              <div class="col-xs-8">
+                <%= f.label :iban, "IBAN" %>
+                <%= f.text_field :iban, class: "form-control" %>
+              </div>
+              <div class="col-xs-4">
+                <%= f.label :bic, "BIC" %>
+                <%= f.text_field :bic, class: "form-control" %>
+              </div>
+            </div>
+
+            <hr>
+
+            <h3 id="valider">Modifiez votre mot de passe</h3>
+
+            <div class="row">
+              <div class="col-xs-12">
+                <%= f.label :password, "Nouveau mot de passe" %>
+                <%= f.password_field :password, class: "form-control" %>
+              </div>
+            </div>
+
+            <hr>
+
+            <h1>Validez vos modifications</h1>
+
+            <div class="form-group">
+              <%= f.label :current_password, "Mot de passe actuel" %> <i>(Nous avons besoin de votre mot de passe actuel pour effectuer la modification)</i>
+              <%= f.password_field :current_password, class: "form-control" %>
+            </div>
+
+            <div class="form-group text-right">
+              <%= f.submit "Modifiez mon profil", class: "btn btn-success" %>
+            </div>
+        <% end %>
+
+        <hr>
+
+        <h3>Supprimez votre compte</h3>
+
+        <p>Quel dommage ! Contactez-nous avant de supprimer votre compte. <%= link_to "Supprimer mon compte", registration_path(resource_name), :data => { :confirm => "Quel dommage !!!" }, :method => :delete %></p>
+
+      </div>
+
+<script>
+    $('#sandbox-container .input-group.date').datepicker({
+        format: "dd/mm/yyyy"
+    });
+</script>

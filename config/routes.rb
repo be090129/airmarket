@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  devise_for :users, path_names: {sign_in: "login"}
+  devise_for :users, controllers: {
+                       sessions: 'users/sessions',
+                      registrations: 'users/registrations'
+                   }
+
 
   resources :listings do
     resources :orders do

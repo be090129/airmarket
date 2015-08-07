@@ -107,6 +107,8 @@ class OrdersController < ApplicationController
     end
   end
 
+
+
   private
     def load_post
       @listing = Listing.find(params[:listing_id])

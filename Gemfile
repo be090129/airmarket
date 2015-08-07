@@ -29,7 +29,7 @@ gem 'countries'
 gem 'geocoder'
 gem "nested_form"
 gem 'ransack'
-gem 'mangopay', "~> 3.0.10"
+gem 'mangopay', "~> 3.0.18"
 
 
 group :development, :test do

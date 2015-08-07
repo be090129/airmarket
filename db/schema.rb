@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806233821) do
+ActiveRecord::Schema.define(version: 20150807014134) do
 
   create_table "images", force: :cascade do |t|
     t.string   "caption"
@@ -91,6 +91,10 @@ ActiveRecord::Schema.define(version: 20150806233821) do
     t.date     "birthday"
     t.string   "bic"
     t.string   "iban"
+    t.integer  "mangopay_user_id"
+    t.integer  "mangopay_wallet_id"
+    t.integer  "mangopay_bank_id"
+    t.integer  "mangopay_card_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
