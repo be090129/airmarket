@@ -29,7 +29,7 @@
                 </div>
               </div>
               <div class="property-text">
-                <h3><%= link_to listing.name.capitalize, listing_path(listing) %><small>22, JJ Road, Yogyakarta</small></h3>
+                <h3><%= link_to listing.name.capitalize, listing_path(listing) %><small><%= listing.city %> - <%= listing.country %></small></h3>
                 <p><%= listing.summary %></p>
                 <p><%= link_to "En savoir plus",listing_path(listing) , class: "btn btn-success" %></p>
               </div>
