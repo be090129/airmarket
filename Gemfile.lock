@@ -104,6 +104,8 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    mangopay (3.0.14)
+      multi_json (>= 1.7.7)
     masonry-rails (0.2.4)
       railties
     mime-types (2.6.1)
@@ -224,6 +226,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
+  mangopay (~> 3.0.10)
   masonry-rails
   nested_form
   paperclip (~> 4.2)
