@@ -2,7 +2,7 @@
 <div class="col-md-3 sidebar">
   <!-- break -->
   <div class="widget widget-sidebar widget-white">
-    <% if user_signed_in? &&@listing.user == current_user %>
+    <% if user_signed_in? && @listing.user == current_user %>
         <div class="widget-header">
           <h3>Modification</h3>
         </div>
@@ -14,6 +14,14 @@
         <div class="widget-header">
           <h3>Réservation</h3>
         </div>
+
+        <div class="center">
+            <h5>Contactez <%= @listing.user.first_name %> maintenant !</h5>
+
+            <% @listing.user.images.limit(1).each do |vimage| %>
+                  <%= image_tag(vimage.photo.url(:avatar), class: "circular") if !vimage.nil?%>
+            <% end %>
+        </div><br />
 
         <%= render "orders/form" %>
 

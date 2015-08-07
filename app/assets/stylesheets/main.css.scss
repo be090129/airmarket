@@ -1107,7 +1107,13 @@ input[type="color"]:focus,
 
 #map,
 #map-property{
-  background-color: #1b1d2a;
+   background-color: #1b1d2a;
+   width: 100%;
+   height: 350px;
+ }
+
+#map-property-static{
+  background-color: #fff;
   width: 100%;
   height: 350px;
 }
