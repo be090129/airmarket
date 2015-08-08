@@ -49,6 +49,7 @@ class OrdersController < ApplicationController
     @message =   @order.messages.new
   end
 
+
   def create
     @order = Order.new(order_params)
     @listing = Listing.find(params[:listing_id])
@@ -59,6 +60,7 @@ class OrdersController < ApplicationController
     @order.buyer_id = current_user.id
     @order.status = "Pending"
 
+    AirmarketApi.calculate_order(@listing, @order)
 
     respond_to do |format|
       if @order.save
@@ -107,8 +109,6 @@ class OrdersController < ApplicationController
     end
   end
 
-
-
   private
     def load_post
       @listing = Listing.find(params[:listing_id])
@@ -139,6 +139,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message,:check_payin,:check_payout )
+      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message,:check_payin,:check_payout, :fees_buyer, :fees_seller, :order_payout )
     end
 end
