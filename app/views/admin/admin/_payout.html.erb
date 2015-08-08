@@ -1,0 +1,20 @@
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <p>Payout</p>
+    </div>
+    <div class="panel-body">
+      <table class="table table-striped">
+        <tbody>
+        <% @orders.each do |order| %>
+            <tr>
+              <td><%= link_to "Make payout #{order.id}", edit_admin_order_path(order) if order.id %></td>
+              <td><%= order.order_price %> </td>
+
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

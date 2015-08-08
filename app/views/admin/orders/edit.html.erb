@@ -1,0 +1,55 @@
+<%# encoding: utf-8 %>
+
+<div id="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 col-md-push-3">
+          <%= form_for([:admin, @order]) do |f| %>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <div class="row">
+                    <div class="col-xs-7 col-md-9">
+                      <h4><%= @order.listing.name %></h4>
+                      <p><%= @order.start_date.strftime("%d %B %Y") %> au <%= @order.end_date.strftime("%d %B %Y") %></p>
+                    </div>
+                    <div class="col-xs-5 col-md-3 text-right">
+                      <%= render "orders/status/status", :order => @order %>
+                      <h2><%= @order.order_price %> €</h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <div class="col-xs-6">
+                    <p><b>De</b></p>
+                    <p><%= @order.buyer.first_name %>  <%= @order.buyer.last_name %> </p>
+                    <p><%= @order.buyer.email %></p>
+                    <p><b>Vers</b></p>
+                    <p><%= @order.seller.first_name %>  <%= @order.seller.last_name %> </p>
+                    <p><%= @order.seller.email %></p>
+                  </div>
+                  <div class="col-xs-6">
+                    <p><b>De</b></p>
+                    <p><%= @order.buyer.first_name %>  <%= @order.buyer.last_name %> </p>
+                    <p><%= @order.buyer.email %></p>
+                    <p><b>Vers</b></p>
+                    <p><%= @order.seller.first_name %>  <%= @order.seller.last_name %> </p>
+                    <p><%= @order.seller.email %></p>
+                  </div>
+                  <div class="col-xs-12  text-right">
+                    <%= link_to 'Payout', admin_orders_path, class: "btn btn-success" %>
+                    <%= link_to 'Retour', admin_orders_path, class: "btn btn-danger" %>
+                  </div>
+                </div>
+
+              </div>
+          <%end%>
+
+        <%= render "orders/edit/index_message" %>
+
+      </div>
+
+      <%= render "admin/sidebar" %>
+
+    </div>
+  </div>
+</div>

@@ -25,6 +25,11 @@ Rails.application.routes.draw do
   get 'sales' => "orders#sales"
   get 'purchases' => "orders#purchases"
 
+  namespace :admin do
+    root to: "admin#home"
+    resources :orders
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

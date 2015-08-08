@@ -10,13 +10,13 @@
     <p>Votre demande a été pré-approuvée. Merci de procéder au paiement en cliquant sur le bouton "Payer" ci-dessous.</p>
     <p>Bonne journée</p>
 <% elsif order.status == "Payed" %>
-    <h3>Détail de la vente</h3>
+    <h3>Détail de la vente - N°<%= order.id %></h3>
     <p><b>Prénom :</b> <%= order.seller.first_name %></p>
     <p><b>Nom :</b> <%= order.seller.last_name %></p>
     <p><b>Email :</b> <%= order.seller.email %></p>
     <p>Merci de prendre contact directement avec <%= order.seller.first_name %> pour les dernières modalités.</p>
 <% elsif order.status == "Cancelled" %>
-    <p>Merci de prendre contact avec nos équipes.</p>
+    <p>Merci de prendre contact avec nos équipesavec l'identifiant : N°<%= order.id %></p>
 <% elsif order.status == "Refused" %>
 <% elsif order.status == "Expired" %>
 <%end%>

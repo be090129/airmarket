@@ -8,4 +8,8 @@ class Order < ActiveRecord::Base
   belongs_to :seller, class_name: "User"
 
   accepts_nested_attributes_for :messages, :allow_destroy => true
+
+  scope :payed, -> { where('status = ?' , "Payed") }
+  scope :payout, -> { where('start_date = ? AND check_payout = ?' , Date.today-1, false) }
+
 end

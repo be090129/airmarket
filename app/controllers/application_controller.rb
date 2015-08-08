@@ -5,6 +5,12 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
+  def admin
+    authenticate_or_request_with_http_basic do |username, password|
+      username == USER_ID && password == USER_PASSWORD
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
