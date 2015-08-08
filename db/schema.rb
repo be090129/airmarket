@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150808024904) do
+ActiveRecord::Schema.define(version: 20150808032623) do
 
   create_table "images", force: :cascade do |t|
     t.string   "caption"
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(version: 20150808024904) do
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "order_price"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "listing_id"
     t.integer  "buyer_id"
     t.integer  "seller_id"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 20150808024904) do
     t.integer  "fees_buyer"
     t.integer  "fees_seller"
     t.integer  "order_payout"
+    t.integer  "mangopay_transaction_id"
   end
 
   add_index "orders", ["listing_id"], name: "index_orders_on_listing_id"

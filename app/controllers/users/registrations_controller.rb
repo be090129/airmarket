@@ -11,9 +11,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def create
   #   createMangopayAccount(@contact)
   # end
-
+10
   def createMangopayAccount(contact)
     if contact.mangopay_user_id
+
+      puts contact.mangopay_user_id
       return_value=MangopayApi.update_user_id(contact)
     else
       return_value=MangopayApi.create_user_id(contact)
@@ -41,6 +43,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
         contact.save
       end
     end
+  end
+
+  def create_user_wallet(returned_value)
+    returned_value.instance_of? MangoPay::ResponseError
   end
 
   def mangopay_api_throws_an_error(returned_value)

@@ -25,6 +25,13 @@ Rails.application.routes.draw do
   get 'sales' => "orders#sales"
   get 'purchases' => "orders#purchases"
 
+  #PAYIN
+
+  get ':listings/:listing_id/orders/:id/payin' => 'orders#payin', as: :payin
+  get 'orders/:id/directpayin' => 'orders#dopayin', as: :directpayin
+  get 'orders/:id/changecard' => 'orders#changecard', as: :changecard
+  get 'orders/:id/payin_ok' => 'orders#payin_ok', as: :payin_ok
+
   namespace :admin do
     root to: "admin#home"
     resources :orders

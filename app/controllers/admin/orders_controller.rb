@@ -2,6 +2,7 @@ class Admin::OrdersController < Admin::AdminController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
 
+
   # GET /orders
   # GET /orders.json
   def index
@@ -73,6 +74,6 @@ class Admin::OrdersController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message, :check_payin, :check_payout, :fees_buyer, :fees_seller, :order_payout )
+      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message, :check_payin, :check_payout, :fees_buyer, :fees_seller, :order_payout, :mangopay_transaction_id )
     end
 end

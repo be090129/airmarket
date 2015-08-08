@@ -1,14 +1,187 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_filter :load_post, only: [:new]
+
   before_action :authenticate_user!
   before_action :maj_user, only: [:new, :create]
+
+  before_action :createMangopayCardRegister, only: [:payin]
+  before_action :calculate_order, only: [:payin]
+  before_action :get_card_id, only: [:payin]
+
+
+  def createMangopayCardRegister
+
+    @cardPreRegistration=nil
+    buyer=Order.find(params[:id]).buyer
+
+    reset_session if !session.has_key?(:firstloadok)
+
+    if !session.has_key?(:firstloadok)
+      return_value=MangopayApi.create_cb_registration(buyer.mangopay_user_id)
+      mangopay_api_throws_an_error(return_value) ? (error= return_value) : (@cardPreRegistration=return_value)
+      if !error.nil?
+        flash[:error] = error
+      else
+        session[:cardPreRegistration]=@cardPreRegistration
+        session[:firstloadok]=true
+        #get_card_id
+      end
+    end
+  end
+
+
+  def payin
+    #back from 3dSecure
+    valid_payin(params[:transactionId]) if params[:transactionId]
+
+    @order=Order.find(params[:id])
+
+    if !(@order.buyer.mangopay_card_id.nil? || @order.buyer.mangopay_card_id==0)
+      mangopay_api_call_result_fetchcardalias = MangopayApi.fetch_card_alias(@order.buyer.mangopay_card_id)
+      if mangopay_api_call_result_fetchcardalias.instance_of? MangoPay::ResponseError
+        error_string = "Your card details could not be saved, because of following errors: "+ mangopay_api_call_result_fetchcardalias.type+"("+mangopay_api_call_result_fetchcardalias.code+")"+": "+mangopay_api_call_result_fetchcardalias.message
+        flash[:error] = error_string
+      else
+        @card_alias=mangopay_api_call_result_fetchcardalias["Alias"]
+      end
+    else
+      @cardPreRegistration = session[:cardPreRegistration]
+      #@cardPreRegistration = MangopayApi.fetch_cb_registration(@cardPreRegistration)
+    end
+  end
+
+  def payin_ok
+    @order=Order.find(params[:id])
+  end
+
+  def get_card_id
+    if params[:data] || params[:errorCode]
+      @order=Order.find(params[:id])
+      @cardPreRegistration=session[:cardPreRegistration]
+
+      if (@order.buyer.mangopay_card_id.nil? || @order.buyer.mangopay_card_id==0)
+        #@cardPreRegistration = session[:cardPreRegistration]
+        if params[:data]
+          @cardPreRegistration["RegistrationData"]="data="+params[:data]
+        elsif params[:errorCode]
+          case params[:errorCode]
+            when "02625"
+              error_info= "Numero de carte invalide"
+            when "02626"
+              error_info= "Date d'expiration invalide. Utilisez le format mmdd (ex: 0715)"
+            when "02627"
+              error_info= "Cryptogramme (CCV) invalide"
+            when "02628"
+              error_info= "Transaction refusee"
+          end
+          error_alert = "Vos informations de paiement sont erronees"
+          error_solution="Verifiez vos informations de paiement"
+          flash[:error] = MangopayApi.process_error("Card registration",error_alert,error_info,error_solution,{:current_user => @order.buyer.email, :mangopay_details => params[:errorCode]})
+          return redirect_to :payin
+        end
+
+        if not @cardPreRegistration["RegistrationData"].blank?
+          mangopay_api_call_result_getcardid = MangopayApi.update_cb_registration(@cardPreRegistration)
+        end
+
+        if mangopay_api_call_result_getcardid.instance_of? MangoPay::ResponseError
+          flash[:error] = MangopayApi.process_error("Card registration","Paiement impossible",mangopay_api_call_result_getcardid.message,nil,{:current_user => "air market", :mangopay_details => mangopay_api_call_result_getcardid.code})
+          return redirect_to :payin
+        else
+          #Save cardId
+          @order.buyer.mangopay_card_id=mangopay_api_call_result_getcardid["CardId"]
+          @order.buyer.save
+        end
+      end
+
+      dopayin if !(@order.buyer.mangopay_card_id.nil? || @order.buyer.mangopay_card_id==0)
+    end
+  end
+
+  def dopayin
+    #PAYIN
+    @order = Order.find(params[:id])
+    @listing = Listing.find(params[:listing_id])
+    calculate_order(@listing, @order)
+    debit_amount_cents = @payin*100
+    fees_amount_cents = @payin*16.275
+
+    debit_currency = "EUR"
+    secureModeReturnURL=payin_url(@order.id)
+    mangopay_api_call_result_dopayin = MangopayApi.create_payin(@order.buyer,debit_amount_cents,debit_currency,fees_amount_cents,secureModeReturnURL)
+
+    if MangopayApi.isInError(mangopay_api_call_result_dopayin)
+      show_payin_error(mangopay_api_call_result_dopayin)
+    elsif MangopayApi.isIn3dSecure(mangopay_api_call_result_dopayin)
+      return redirect_to mangopay_api_call_result_dopayin["SecureModeRedirectURL"]
+    else
+      transaction_id = mangopay_api_call_result_dopayin["Id"]
+      valid_payin(transaction_id)
+    end
+  end
+
+  #Dernière étape du paiement Mangopay
+  def valid_payin(transaction_id)
+    mangopay_api_call_result_fetchpayin=MangopayApi.fetch_payin(transaction_id)
+    if MangopayApi.isInError(mangopay_api_call_result_fetchpayin)
+      show_payin_error(mangopay_api_call_result_fetchpayin)
+    elsif (mangopay_api_call_result_fetchpayin["Status"]=="SUCCEEDED")
+      @order=Order.find(params[:id])
+      @order.mangopay_transaction_id = transaction_id
+      @order.check_payin = true
+      @order.save
+
+      flash[:notice] = "Votre paiement a bien ete enregistre."
+      return redirect_to payin_ok_path(:id => @order.id)
+    end
+  end
+
+  def calculate_order(listing, order)
+    fees_b = 0.03
+    fees_s = 0.1
+
+    period = (order.end_date - order.start_date)
+    price = listing.listing_price_standard * period
+
+    order.fees_buyer = (fees_b * price).round(0)
+    order.fees_seller = (fees_s * price).round(0)
+
+    order.order_price = price +  order.fees_seller
+    order.order_payout = price -  order.fees_buyer
+
+    @payin = order.order_price
+    @payout = order.order_payout
+
+  end
+
+  def show_payin_error(mangopay_api_call)
+    error_alert = "Le paiement n'a pas pu etre realise"
+    error_info=mangopay_api_call["ResultMessage"]
+    error_solution="Contactez votre banque ou nos services pour trouver une autre solution de paiement"
+    flash[:error] = MangopayApi.process_error("PayIn",error_alert,error_info,error_solution,{:current_user => "toto", :mangopay_details => mangopay_api_call["ResultCode"]})
+    return redirect_to :payin
+  end
+
+  def changecard
+    buyer=Order.find(params[:id]).buyer
+    buyer.mangopay_card_id=nil
+    buyer.save
+    reset_session
+    return redirect_to :payin
+  end
+
+  def mangopay_api_throws_an_error(returned_value)
+    returned_value.instance_of? MangoPay::ResponseError
+  end
+
 
   # GET /orders
   # GET /orders.json
   def index
     @orders = Order.all
   end
+
 
   def sales
     @orders = Order.all.where(seller: current_user).order("created_at DESC")
@@ -60,7 +233,7 @@ class OrdersController < ApplicationController
     @order.buyer_id = current_user.id
     @order.status = "Pending"
 
-    AirmarketApi.calculate_order(@listing, @order)
+    calculate_order(@listing, @order)
 
     respond_to do |format|
       if @order.save
@@ -139,6 +312,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message,:check_payin,:check_payout, :fees_buyer, :fees_seller, :order_payout )
+      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message,:check_payin,:check_payout, :fees_buyer, :fees_seller, :order_payout, :mangopay_transaction_id )
     end
 end
