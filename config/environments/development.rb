@@ -41,6 +41,8 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
+  #PARAMETRE
+
   config.mangopay_sandbox= true
   config.mangopay_clientid= 'devexclusivevillas'
   config.mangopay_passphrase= 'yRGOfN80CNJE2KBaqpWukwWNzjnmnBhnHWPFA7h1oUnR1635sp'

@@ -65,8 +65,9 @@
 <!-- end:article -->
 
 <script>
+
     handler = Gmaps.build('Google');
-    handler.buildMap({ provider: { zoom: 4}, internal: {id: 'map'}}, function(){
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
         markers = handler.addMarkers([
             {
                 "lat": <%= @listing.latitude%>,
@@ -76,10 +77,10 @@
                     "width":  45,
                     "height": 45
                 },
-                "infowindow": "hello!"
             }
         ]);
+        handler.map.centerOn([<%= @listing.latitude%>, <%= @listing.longitude%>]);
         handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
+        handler.getMap().setZoom(14);
     });
 </script>

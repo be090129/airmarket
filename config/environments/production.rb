@@ -76,6 +76,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  #PARAMETRE
+
   config.paperclip_defaults = {
       :storage => :s3,
       :s3_credentials => {
@@ -85,9 +87,13 @@ Rails.application.configure do
       }
   }
 
+  #PARAMETRE
+
   config.mangopay_sandbox= false
   config.mangopay_clientid= 'prodexclusivevillas'
   config.mangopay_passphrase= '50kxdsTFKpRNktp8k95L4BhBnx67VPFt2sfzsyEnuqrddjJ5Fg'
+
+  #PARAMETRE
 
   config.action_mailer.default_url_options = { :host => 'http://airmarketrental.herokuapp.com/' }
 end
