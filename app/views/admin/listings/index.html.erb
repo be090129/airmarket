@@ -27,7 +27,7 @@
             <th>Nom</th>
             <th>Ville</th>
             <th>Pays</th>
-            <th></th>
+            <th>Mise en avant</th>
             <th></th>
           </tr>
           </thead>
@@ -38,6 +38,11 @@
                 <td><%= listing.name %></td>
                 <td><%= listing.city %></td>
                 <td><%= listing.country %></td>
+                <% if listing.miseenavant == true %>
+                    <td>Oui</td>
+                <%else%>
+                    <td>Non</td>
+                <%end%>
                 <td><%= link_to "Visualiser", edit_admin_listing_path(listing.id) %></td>
                 <td><%= link_to 'Effacer', [:admin, listing], method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>

@@ -12,4 +12,7 @@ class Order < ActiveRecord::Base
   scope :payed, -> { where('status = ?' , "Payed") }
   scope :payout, -> { where('start_date < ? AND check_payout = ?' , Date.today, false) }
 
+  scope :expired_pending, -> { where('created_at <= ? AND status = ?' , Date.today-2, "Pending") }
+  scope :expired_validated, -> { where('validated_time <= ? AND status = ?' , Date.today-2, "Validated") }
+
 end

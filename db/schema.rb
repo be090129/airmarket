@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150809194435) do
+ActiveRecord::Schema.define(version: 20150809211605) do
 
   create_table "images", force: :cascade do |t|
     t.string   "caption"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20150809194435) do
     t.integer  "order_payout"
     t.integer  "mangopay_transaction_id"
     t.integer  "mangopay_payout_id"
+    t.datetime "validated_time"
   end
 
   add_index "orders", ["listing_id"], name: "index_orders_on_listing_id"

@@ -314,6 +314,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if params[:validated]
         @order.status = "Validated"
+        @order.validated_time = Time.zone.now.to_datetime
         #autres actions
         @order.save
         format.html { redirect_to sales_path, notice: 'Validated' }
@@ -376,6 +377,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message,:check_payin,:check_payout, :fees_buyer, :fees_seller, :order_payout, :mangopay_transaction_id,:mangopay_payout_id )
+      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message,:check_payin,:check_payout, :fees_buyer, :fees_seller, :order_payout, :validated_time, :mangopay_transaction_id,:mangopay_payout_id )
     end
 end

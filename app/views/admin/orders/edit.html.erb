@@ -34,6 +34,7 @@
                     <p><%= @order.seller.email %></p>
                   </div>
                   <div class="col-xs-12  text-right">
+                    <%= submit_tag 'Expire', name: 'expired',:class => "btn btn-danger" %>
                     <%= link_to 'Payout', payoutseller_path(@order), class: "btn btn-success" %>
                     <%= link_to 'Retour', admin_orders_path, class: "btn btn-danger" %>
                   </div>

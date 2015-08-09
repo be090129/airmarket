@@ -5,6 +5,8 @@ class Admin::AdminController < ApplicationController
 
   def home
     @orders = Order.payed.payout
+    @pending = Order.expired_pending
+    @validated = Order.expired_validated
   end
 
 

@@ -46,12 +46,14 @@ class Admin::OrdersController < Admin::AdminController
     @order = Order.find(params[:id])
 
     respond_to do |format|
-      if @order.update(listing_params)
-        format.html { redirect_to admin_orders_path, notice: 'Listing was successfully updated.' }
-      else
-        format.html { render :edit }
+      if params[:expired]
+        @order.status = "Expired"
+        #autres actions
+        @order.save
+        format.html { redirect_to admin_root_path, notice: 'Expired' }
       end
     end
+
   end
 
   def destroy
@@ -73,6 +75,6 @@ class Admin::OrdersController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message, :check_payin, :check_payout, :fees_buyer, :fees_seller, :order_payout, :mangopay_transaction_id,:mangopay_payout_id )
+      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message, :check_payin, :check_payout, :fees_buyer, :validated_time, :fees_seller, :order_payout, :mangopay_transaction_id,:mangopay_payout_id )
     end
 end
