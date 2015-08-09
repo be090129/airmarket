@@ -45,6 +45,7 @@
                 <td class="center"><%= order.buyer.first_name %></td>
                 <td class="center"><%= number_to_currency(order.order_price, unit: "€", format: "%n %u") %></td>
                 <td class="center"><%= link_to "Visualiser", edit_admin_order_path(order.id) %></td>
+                <td class="center"><%= link_to 'Effacer', [:admin, order], method: :delete, data: { confirm: 'Are you sure?' } %></td>
               </tr>
           <% end %>
           </tbody>
