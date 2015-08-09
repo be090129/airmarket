@@ -37,10 +37,10 @@
     <div class="row">
       <% if @order.buyer_id == current_user.id %>
           <p><%= @order.seller.city %>, <%= @order.seller.country %> </p>
-          <p>Membre depuis <%= @order.seller.created_at.strftime("%Y") %></p>
+          <p>Membre depuis <%= @order.seller.created_at.strftime("%B %Y") %></p>
       <% elsif @order.seller_id == current_user.id %>
           <p><%= @order.buyer.city %>, <%= @order.buyer.country %> </p>
-          <p>Membre depuis <%= @order.buyer.created_at.strftime("%Y") %></p>
+          <p>Membre depuis <%= @order.buyer.created_at.strftime("%B %Y") %></p>
       <%end%>
     </div>
 

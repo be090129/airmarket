@@ -10,6 +10,6 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :messages, :allow_destroy => true
 
   scope :payed, -> { where('status = ?' , "Payed") }
-  scope :payout, -> { where('start_date = ? AND check_payout = ?' , Date.today-1, false) }
+  scope :payout, -> { where('start_date < ? AND check_payout = ?' , Date.today, false) }
 
 end

@@ -2,12 +2,12 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_filter :load_post, only: [:new]
 
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:valid_payin]
   before_action :maj_user, only: [:new, :create]
 
   before_action :createMangopayCardRegister, only: [:payin]
-  before_action :calculate_order, only: [:payin]
   before_action :get_card_id, only: [:payin]
+  before_action :calcul_payoutproprietaire, only: [:payoutproprietaire]
 
 
   def createMangopayCardRegister
@@ -50,6 +50,7 @@ class OrdersController < ApplicationController
       #@cardPreRegistration = MangopayApi.fetch_cb_registration(@cardPreRegistration)
     end
   end
+
 
   def payin_ok
     @order=Order.find(params[:id])
@@ -102,19 +103,22 @@ class OrdersController < ApplicationController
   def dopayin
     #PAYIN
     @order = Order.find(params[:id])
-    @listing = Listing.find(params[:listing_id])
-    calculate_order(@listing, @order)
-    debit_amount_cents = @payin*100
-    fees_amount_cents = @payin*16.275
+    @price = @order.order_price
+
+    @fees = @order.fees_buyer + @order.fees_seller
+
+    debit_amount_cents =  @price.to_f*100
+    fees_amount_cents = @fees.to_f*100
 
     debit_currency = "EUR"
-    secureModeReturnURL=payin_url(@order.id)
+    secureModeReturnURL= payin_url(@order.id)
+
     mangopay_api_call_result_dopayin = MangopayApi.create_payin(@order.buyer,debit_amount_cents,debit_currency,fees_amount_cents,secureModeReturnURL)
 
     if MangopayApi.isInError(mangopay_api_call_result_dopayin)
       show_payin_error(mangopay_api_call_result_dopayin)
     elsif MangopayApi.isIn3dSecure(mangopay_api_call_result_dopayin)
-      return redirect_to mangopay_api_call_result_dopayin["SecureModeRedirectURL"]
+       return redirect_to mangopay_api_call_result_dopayin["SecureModeRedirectURL"]
     else
       transaction_id = mangopay_api_call_result_dopayin["Id"]
       valid_payin(transaction_id)
@@ -130,30 +134,16 @@ class OrdersController < ApplicationController
       @order=Order.find(params[:id])
       @order.mangopay_transaction_id = transaction_id
       @order.check_payin = true
+      @order.check_payout = false
+      @order.status = "Payed"
       @order.save
 
       flash[:notice] = "Votre paiement a bien ete enregistre."
-      return redirect_to payin_ok_path(:id => @order.id)
+      return redirect_to edit_listing_order_path(@order.listing_id, @order.id)
     end
   end
 
-  def calculate_order(listing, order)
-    fees_b = 0.03
-    fees_s = 0.1
 
-    period = (order.end_date - order.start_date)
-    price = listing.listing_price_standard * period
-
-    order.fees_buyer = (fees_b * price).round(0)
-    order.fees_seller = (fees_s * price).round(0)
-
-    order.order_price = price +  order.fees_seller
-    order.order_payout = price -  order.fees_buyer
-
-    @payin = order.order_price
-    @payout = order.order_payout
-
-  end
 
   def show_payin_error(mangopay_api_call)
     error_alert = "Le paiement n'a pas pu etre realise"
@@ -169,6 +159,63 @@ class OrdersController < ApplicationController
     buyer.save
     reset_session
     return redirect_to :payin
+  end
+
+  def payoutseller
+    @order=Order.find(params[:id])
+  end
+
+  def calcul_payoutseller
+    @order=Order.find(params[:id])
+
+    mangopayid_proprio= @order.seller.mangopay_user_id
+    walletid_proprio= @order.seller.mangopay_wallet_id
+    bankid_proprio= @order.seller.mangopay_bank_id
+
+    if (mangopayid_proprio.blank? || walletid_proprio.blank? || bankid_proprio.blank?)
+      flash[:error]= "Le payout ne peut etre effectue car les informations bancaires du proprietaire ne sont pas connues"
+    end
+
+    @somme_a_payer = @order.order_payout
+  end
+
+  def dopayout
+    @order=Order.find(params[:id])
+    #Transfert de l'argent de la wallet du locataire à la wallet du proprio
+    mangopayid_locataire= @order.buyer.mangopay_user_id
+    walletid_locataire= @order.buyer.mangopay_wallet_id
+
+    mangopayid_proprio= @order.seller.mangopay_user_id
+    walletid_proprio= @order.seller.mangopay_wallet_id
+    bankid_proprio= @order.seller.mangopay_bank_id
+
+    @somme_a_payer = @order.order_payout
+
+    fees=0
+    montant_payout=@somme_a_payer*100
+
+    mangopay_api_call_result_dotransferbetweenwallet = MangopayApi.transfer_between_wallets(walletid_locataire,walletid_proprio,mangopayid_locataire,mangopayid_proprio,montant_payout,fees)
+    if MangopayApi.isInError(mangopay_api_call_result_dotransferbetweenwallet)
+      flash[:error] = "Une erreur s est produite lors du transfert entre voyageur et proprio"
+    else
+      #Virement sur le compte du proprio
+      tag= "#{@order.id} / #{@order.buyer.last_name} / #{@order.seller.last_name}"
+      mangopay_api_call_result_payout = MangopayApi.payout(walletid_proprio,mangopayid_proprio,bankid_proprio,montant_payout,fees,tag[0...255])
+      if MangopayApi.isInError(mangopay_api_call_result_payout)
+        flash[:error] = "Une erreur s est produite lors virement sur le compte du proprio"
+      else
+
+        @order.mangopay_payout_id=mangopay_api_call_result_payout["Id"]
+        @order.check_payout=true
+
+          #envoie email acompte proprietaire
+
+        @order.save
+        flash[:notice] = "Demande de virement effectuee avec succes. Le virement sera effectif dans maximum 2 jours."
+        return redirect_to admin_root_path
+      end
+    end
+    return redirect_to payoutseller_path(:id => @order.id)
   end
 
   def mangopay_api_throws_an_error(returned_value)
@@ -222,6 +269,17 @@ class OrdersController < ApplicationController
     @message =   @order.messages.new
   end
 
+  def calculate(listing, order)
+    fees_b = 0.03
+    fees_s = 0.1
+    period = (order.end_date - order.start_date)
+    price = listing.listing_price_standard * period
+    order.fees_buyer = (fees_b * price).round(0)
+    order.fees_seller = (fees_s * price).round(0)
+    order.order_price = price +  order.fees_seller
+    order.order_payout = price -  order.fees_buyer
+  end
+
 
   def create
     @order = Order.new(order_params)
@@ -233,7 +291,7 @@ class OrdersController < ApplicationController
     @order.buyer_id = current_user.id
     @order.status = "Pending"
 
-    calculate_order(@listing, @order)
+    calculate(@listing, @order)
 
     respond_to do |format|
       if @order.save
@@ -312,6 +370,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message,:check_payin,:check_payout, :fees_buyer, :fees_seller, :order_payout, :mangopay_transaction_id )
+      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message,:check_payin,:check_payout, :fees_buyer, :fees_seller, :order_payout, :mangopay_transaction_id,:mangopay_payout_id )
     end
 end

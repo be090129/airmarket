@@ -2,7 +2,7 @@
 
 <% if order.status == "Pending" %>
 <% elsif order.status == "Validated" %>
-    <%= submit_tag 'Payer', name: 'payed', :class => "btn btn-success" %>
+    <%= link_to "Payer", payin_path(order.id), :class => "btn btn-success" %>
     <%= submit_tag 'Annuler', name: 'cancelled',:class => "btn btn-danger" %>
 <% elsif order.status == "Payed" %>
     <%= submit_tag 'Annuler', name: 'cancelled',:class => "btn btn-danger" %>

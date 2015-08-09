@@ -12,7 +12,11 @@
             </div>
             <div class="col-xs-5 col-md-3 text-right">
               <%= render "orders/status/status", :order => @order %>
-              <h2><%= @order.order_price %> €</h2>
+              <% if @order.buyer_id == current_user.id %>
+                  <h2><%= @order.order_price %> €</h2>
+              <% elsif @order.seller_id == current_user.id %>
+                  <h2><%= @order.order_price - @order.fees_seller %> €</h2>
+              <%end%>
             </div>
           </div>
         </div>

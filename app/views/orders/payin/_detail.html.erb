@@ -1,0 +1,76 @@
+<div class="col-md-9 col-md-push-3" >
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-xs-7 col-md-9">
+          <h4><%= @order.listing.name %></h4>
+          <p><%= @order.start_date.strftime("%d %B %Y") %> au <%= @order.end_date.strftime("%d %B %Y") %></p>
+        </div>
+        <div class="col-xs-5 col-md-3 text-right">
+          <%= render "orders/status/status", :order => @order %>
+          <h2><%= @order.order_price %> €</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <div class="col-xs-12">
+          <% if @card_alias && @order.order_price !=0 %>
+              <p>Effectuer votre paiement avec <%= @card_alias %></p>
+              <div class='form-row'>
+                <div class='col-xs-6 form-group'>
+                  <%= button_to "Changer de carte", changecard_path, :id => "open-contacts-dialog-btn", :class => "btn btn-ev-inverse btn-lg pull-right", :method => :get %>
+                </div>
+                <div class='col-xs-6 form-group'>
+                  <%= button_to "Payez #{@order.order_price} €", directpayin_path, :id => "open-contacts-dialog-btn", :class => "button btn btn-ev btn-lg", :method => :get %>
+                </div>
+              </div>
+          <% end %>
+          <% if @payin==0 %>
+              <div class="row">
+                <div class='center col-md-12'>
+                </div>
+              </div>
+          <% end %>
+          <% if @cardPreRegistration && @order.order_price!=0 %>
+              <form action="<%=@cardPreRegistration["CardRegistrationURL"]%>" method="post">
+                <input type='hidden' name="data" value="<%= @cardPreRegistration["PreregistrationData"]%>">
+                <input type='hidden' name="accessKeyRef" value="<%= @cardPreRegistration["AccessKey"]%>">
+                <input type='hidden' name="returnURL" value="<%= payin_url(@order.id)%>">
+                <div class='form-row'>
+                  <div class='col-xs-12 form-group card required'>
+                    <label class='control-label'>Numéro de carte</label>
+                    <input name="cardNumber" class='form-control card-number' size='20' type='text'>
+                  </div>
+                </div>
+                <!--autocomplete='off'-->
+                <div class='form-row'>
+                  <div class='col-xs-6 form-group expiration required'>
+                    <label class='control-label'>Date d'expiration</label>
+                    <input name="cardExpirationDate" class='form-control card-expiry-month' placeholder='ex. 0515' size='4' type='text' >
+                  </div>
+                  <div class='col-xs-6 form-group cvc required'>
+                    <label class='control-label'>Code sécurité</label>
+                    <input name="cardCvx" class='form-control card-cvc' placeholder='ex. 311' size='3' type='text'>
+                  </div>
+                </div><br />
+
+                <div class='form-row'>
+                  <div class='col-xs-12 form-group center'>
+                    <button class='btn btn-success small block' type='submit'>Payez <%= @order.order_price %> € maintenant !</button>
+                  </div>
+                </div>
+
+                <div class='form-row'>
+                  <div class='col-xs-12 error form-group hide'>
+                    <div class='alert-danger alert'>
+                      Merci de corriger votre erreur et de recommencer.
+                    </div>
+                  </div>
+                </div>
+              </form>
+          <% end %>
+        </div>
+    </div>
+  </div>
+</div>

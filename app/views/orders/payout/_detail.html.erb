@@ -1,0 +1,36 @@
+<%# encoding: utf-8 %>
+
+<div class="col-md-9 col-md-push-3" >
+  <div class='row'>
+    <div class='center col-md-12'>
+    </div>
+    <div class='center col-md-12'>
+      <h4><b>N° <%= @order.id %></b> - Location du <%= @order.start_date.strftime("%d/%m/%Y") %> au <%= @order.end_date.strftime("%d/%m/%Y") %></h4>
+    </div>
+  </div><br />
+
+  <div class='center row'>
+    <div class='col-md-5'><br />
+      <p><b>Acheteur :</b><%= @order.buyer.first_name %> <%=@order.buyer.last_name %></p>
+    </div>
+    <div class='col-md-2'><br />
+      <h2>VERS</h2>
+    </div>
+    <div class='col-md-5'><br />
+      <p><b>Vendeur :</b><%= @order.seller.first_name %> <%=@order.seller.last_name %></p>
+    </div>
+  </div>
+
+  <div class='center row'>
+    <div class='col-xs-4 col-xs-offset-1'><br />
+      <%= form_for @order, :url => dopayout_path do |f| %>
+          <input type="hidden" id="montant_payout" value="<%=@somme_a_payer%>"/>
+          <button class='form-control btn btn-success' type='submit'>Faire le virement</button>
+      <% end %>
+    </div>
+    <div class='col-xs-4 col-xs-offset-1'><br />
+     <%= link_to "Retour", edit_admin_order_path(@order), class: "form-control btn btn-danger submit-button"%>
+    </div>
+  </div>
+
+</div>
