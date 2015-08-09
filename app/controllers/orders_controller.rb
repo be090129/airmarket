@@ -103,8 +103,8 @@ class OrdersController < ApplicationController
   def dopayin
     #PAYIN
     @order = Order.find(params[:id])
-    @price = @order.order_price
 
+    @price = @order.order_price
     @fees = @order.fees_buyer + @order.fees_seller
 
     debit_amount_cents =  @price.to_f*100
@@ -270,10 +270,16 @@ class OrdersController < ApplicationController
   end
 
   def calculate(listing, order)
+
+    #gestion des frais
     fees_b = 0.03
     fees_s = 0.1
+
+    #calcul
     period = (order.end_date - order.start_date)
     price = listing.listing_price_standard * period
+
+    #export
     order.fees_buyer = (fees_b * price).round(0)
     order.fees_seller = (fees_s * price).round(0)
     order.order_price = price +  order.fees_seller

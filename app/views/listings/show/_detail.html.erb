@@ -45,10 +45,8 @@
 
                   <h3>Localisation</h3>
 
-                  <div id="map-property-static">
-                      <% if @listing.latitude %>
-                          <%= link_to image_tag("http://maps.google.com/maps/api/staticmap?&center=martinique&sensor=true&zoom=10&size=2000x350&markers=#{@listing.latitude}%2C#{@listing.longitude}"), "https://www.google.fr/maps/place/#{@listing.latitude},#{@listing.longitude}", class: "img-responsive center", target: "_blank" %>
-                      <%end%>
+                  <div style='width: 800px;'>
+                    <div id="map" style='width: 800px; height: 400px;'></div>
                   </div>
 
                   <h3>Description</h3>
@@ -65,3 +63,23 @@
   </div>
 </div>
 <!-- end:article -->
+
+<script>
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: { zoom: 4}, internal: {id: 'map'}}, function(){
+        markers = handler.addMarkers([
+            {
+                "lat": <%= @listing.latitude%>,
+                "lng": <%= @listing.longitude%>,
+                "picture": {
+                    "url": "<%= image_path('house.png')%>",
+                    "width":  45,
+                    "height": 45
+                },
+                "infowindow": "hello!"
+            }
+        ]);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+    });
+</script>

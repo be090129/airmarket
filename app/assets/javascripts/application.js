@@ -19,6 +19,8 @@
 //= require bootstrap-datepicker
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
 //= require gmaps.js
+//= require underscore
+//= require gmaps/google
 //= require masonry/jquery.masonry
 //= require masonry/jquery.imagesloaded.min
 //= require turbolinks

@@ -30,6 +30,8 @@ gem 'geocoder'
 gem "nested_form"
 gem 'ransack'
 gem 'mangopay', "~> 3.0.18"
+gem 'gmaps4rails'
+gem 'underscore-rails'
 
 
 group :development, :test do
