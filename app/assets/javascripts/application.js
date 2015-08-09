@@ -16,9 +16,10 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require bootstrap
+//= require bootstrap-datepicker
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
 //= require gmaps.js
 //= require masonry/jquery.masonry
 //= require masonry/jquery.imagesloaded.min
-//= require bootstrap-datepicker/locales/bootstrap-datepicker.fr.js
 //= require turbolinks
 //= require_tree .

@@ -295,9 +295,9 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to listing_path(@listing), notice: 'Order was successfully created.' }
+        format.html { redirect_to edit_listing_order_path(@order.listing_id, @order.id) }
       else
-        format.html { redirect_to listing_path(@listing), notice: 'Nous avons un probleme technique' }
+        format.html { redirect_to listing_path(@listing), notice: 'Nous avons un probleme technique merci de refaire une demande' }
       end
     end
   end
