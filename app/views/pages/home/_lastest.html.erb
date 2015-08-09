@@ -1,0 +1,35 @@
+<!-- begin:latest -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="heading-title">
+      <h2>Dernières annonces</h2>
+    </div>
+  </div>
+</div>
+<div class="row">
+
+  <% @lastest.limit(4).each do |lastest| %>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+    <div class="property-container">
+      <div class="property-image">
+        <% lastest.images.limit(1).each do |vimage| %>
+            <%= image_tag(vimage.photo.url(:medium), class: "img-responsive")%>
+        <% end %>
+        <div class="property-price">
+          <span><%= lastest.listing_price_standard %> €</span>
+        </div>
+      </div>
+      <div class="property-features">
+       <span><i class="fa fa-home"></i> 5,000 m<sup>2</sup></span>
+        <span><i class="fa fa-hdd-o"></i> 2 Bed</span>
+        <span><i class="fa fa-male"></i> 2 Bath</span>
+      </div>
+      <div class="property-content">
+        <h3><a href="#"><%= link_to lastest.name.capitalize, listing_path(lastest) %></a> <small><%= lastest.city %> - <%= lastest.country %></small></h3>
+      </div>
+    </div>
+  </div>
+  <%end%>
+  <!-- break -->
+</div>
+<!-- end:latest -->

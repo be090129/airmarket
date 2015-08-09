@@ -1,0 +1,69 @@
+<%# encoding: utf-8 %>
+
+<div id="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 col-md-push-3">
+        <%= simple_nested_form_for([:admin, @listing]) do |f| %>
+
+            <h3>Description</h3><hr>
+
+            <div class="form-group">
+              <%= f.label :name, "Nom" %>
+              <%= f.text_field :name, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :miseenavant, "Mise en avant" %>
+              <%= f.check_box :miseenavant, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :summary, "Résumé (255 caractères max.)" %>
+              <%= f.text_area :summary, autofocus: true, class: "form-control",:rows => 3 %>
+            </div>
+            <div class="form-group">
+              <%= f.label :description %>
+              <%= f.text_area :description, autofocus: true, class: "form-control",:rows => 8 %>
+            </div>
+
+            <hr><h3>Tarification</h3><hr>
+
+            <div class="form-group">
+              <%= f.label :listing_price_standard, "Prix de base (en €)" %>
+              <%= f.number_field :listing_price_standard, class: "form-control" %>
+            </div>
+
+            <hr><h3>Localisation</h3><hr>
+            <div class="row">
+              <div class="col-xs-12">
+                <%= f.input :address, :input_html =>{:id => 'gmaps-input-address', class: "form-control", autofocus: true}, :placeholder => 'Commencez à saisir votre adresse', label: "Adresse" %>
+              </div>
+
+            </div>
+            <div id='gmaps-canvas'></div>
+
+            <hr><h3>Photos</h3><hr>
+
+            <div class="form-group">
+              <%= f.fields_for :images do |builder| %>
+                  <%= render 'image_fields', :f => builder %>
+              <%end%><br />
+
+              <p><%= f.link_to_add "Ajouter une photo", :images %></p><br />
+            </div>
+
+            <hr>
+
+            <div class="form-group text-right">
+              <%= f.submit "Publiez ou modifiez votre annonce", class: "btn btn-success" %>
+            </div>
+        <% end %>
+
+      </div>
+
+      <%= render "admin/sidebar" %>
+
+    </div>
+  </div>
+</div>

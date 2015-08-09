@@ -13,6 +13,8 @@ class Listing < ActiveRecord::Base
   has_many :images, :dependent => :destroy
   accepts_nested_attributes_for :images, :reject_if => lambda { |t| t['photo'].nil? }, allow_destroy: true
 
+  scope :miseenavant, -> { where('miseenavant = ?' , true) }
+
   def get_detail_listing
     lat = self.latitude
     lon = self.longitude

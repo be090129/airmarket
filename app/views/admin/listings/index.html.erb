@@ -1,0 +1,62 @@
+<%# encoding: utf-8 %>
+
+<!-- begin:content -->
+<div id="content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 col-md-push-3">
+        <div class="center">
+          <h1>Listings</h1>
+        </div><br />
+
+        <div class="row">
+          <div class='col-md-4'>
+            <p>Nombre d'enregistrements : <%= @listings.total_entries  %></p>
+          </div>
+          <div class="col-md-8 text-right">
+            <%= search_form_for @q, url: admin_listings_path  do |f| %>
+                <%= f.search_field :id_eq,  placeholder: "N° de villa" %>
+                <%= f.submit "Rechercher", class: "btn btn-success" %>
+                <%= link_to 'Annuler', admin_listings_path, class: "btn btn-danger" %>
+            <% end %>
+          </div>
+        </div>
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Ville</th>
+            <th>Pays</th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @listings.each do |listing| %>
+              <tr>
+                <td><%= listing.name %></td>
+                <td><%= listing.city %></td>
+                <td><%= listing.country %></td>
+                <td><%= link_to "Visualiser", edit_admin_listing_path(listing.id) %></td>
+                <td><%= link_to 'Effacer', [:admin, listing], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+        <div class="center">
+          <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
+        </div>
+      </div>
+
+      <%= render "admin/sidebar" %>
+
+    </div>
+  </div>
+</div>
+<!-- end:content -->
+
+
+
+
