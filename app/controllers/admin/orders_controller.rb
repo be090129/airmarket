@@ -48,6 +48,8 @@ class Admin::OrdersController < Admin::AdminController
     respond_to do |format|
       if params[:expired]
         @order.status = "Expired"
+        BuyerMailer.buyer_expired_order(@order).deliver_now
+        SellerMailer.seller_expired_order(@order).deliver_now
         #autres actions
         @order.save
         format.html { redirect_to admin_root_path, notice: 'Expired' }

@@ -1,0 +1,14 @@
+<%# encoding: utf-8 %>
+
+<div id="email">
+  <p>Bonjour <%= @order.buyer.first_name %>,</p>
+
+  <p><%= @order.seller.first_name%> vient d'accepter votre demande pour l'annonce <%= @order.listing.name %>.</p>
+
+  <p>Vous avez 48h pour effectuer votre paiement depuis notre plateforme sécurisée.</p>
+
+  <p><%= link_to "J'effectue mon paiement", edit_listing_order_url(@order.listing_id,@order.id , :host => "https://airmarket.herokuapp.com")%> </p>
+
+  <p>Bonne journée !</p>
+
+</div>

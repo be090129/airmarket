@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_filter :load_post, only: [:new]
 
-  before_action :authenticate_user!, except: [:valid_payin]
+  before_action :authenticate_user!, except: [:dopayin, :valid_payin]
   before_action :maj_user, only: [:new, :create]
 
   before_action :createMangopayCardRegister, only: [:payin]
@@ -51,10 +51,6 @@ class OrdersController < ApplicationController
     end
   end
 
-
-  def payin_ok
-    @order=Order.find(params[:id])
-  end
 
   def get_card_id
     if params[:data] || params[:errorCode]
@@ -136,6 +132,8 @@ class OrdersController < ApplicationController
       @order.check_payin = true
       @order.check_payout = false
       @order.status = "Payed"
+      BuyerMailer.buyer_payed_order(@order).deliver_now
+      SellerMailer.seller_payed_order(@order).deliver_now
       @order.save
 
       flash[:notice] = "Votre paiement a bien ete enregistre."
@@ -302,6 +300,10 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         format.html { redirect_to edit_listing_order_path(@order.listing_id, @order.id) }
+
+        #Email Seller nouvelle demande
+        SellerMailer.new_order(@order).deliver
+
       else
         format.html { redirect_to listing_path(@listing), notice: 'Nous avons un probleme technique merci de refaire une demande' }
       end
@@ -315,11 +317,13 @@ class OrdersController < ApplicationController
       if params[:validated]
         @order.status = "Validated"
         @order.validated_time = Time.zone.now.to_datetime
+        BuyerMailer.validated_order(@order).deliver_now
         #autres actions
         @order.save
         format.html { redirect_to sales_path, notice: 'Validated' }
       elsif params[:refused]
         @order.status = "Refused"
+        BuyerMailer.refused_order(@order).deliver_now
         #autres actions
         @order.save
         format.html { redirect_to sales_path, notice: 'Refused' }
@@ -328,11 +332,6 @@ class OrdersController < ApplicationController
         #autres actions
         @order.save
         format.html { redirect_to cancellation_path, notice: 'Cancelled' }
-      elsif params[:payed]
-        @order.status = "Payed"
-        #autres actions
-        @order.save
-        format.html { redirect_to purchases_path, notice: 'Payed' }
       else
         format.html { render :edit }
       end

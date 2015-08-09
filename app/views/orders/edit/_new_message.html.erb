@@ -5,9 +5,9 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <% if @order.buyer_id == current_user.id %>
-            <p>Envoyez un message à <%= @order.seller.first_name %> pour en savoir plus sur sa demande</p>
+            <p>Envoyez un message à <%= @order.seller.first_name %></p>
         <% elsif @order.seller_id == current_user.id %>
-            <p>Envoyez un message à <%= @order.buyer.first_name %> pour en savoir plus sur sa demande</p>
+            <p>Envoyez un message à <%= @order.buyer.first_name %></p>
         <%end%>
 
         <%= render "messages/form" %>
