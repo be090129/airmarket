@@ -85,5 +85,9 @@ Rails.application.configure do
       }
   }
 
+  config.mangopay_sandbox= false
+  config.mangopay_clientid= 'prodexclusivevillas'
+  config.mangopay_passphrase= '50kxdsTFKpRNktp8k95L4BhBnx67VPFt2sfzsyEnuqrddjJ5Fg'
+
   config.action_mailer.default_url_options = { :host => 'http://airmarketrental.herokuapp.com/' }
 end
