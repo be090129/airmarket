@@ -286,18 +286,9 @@ class OrdersController < ApplicationController
     #export
     order.fees_buyer = (fees_b * price).round(0)
     order.fees_seller = (fees_s * price).round(0)
-    order.order_price = price +  order.fees_buyer
-    order.order_payout = price -  order.seller
+    order.order_price = price + order.fees_buyer
+    order.order_payout = price - order.fees_seller
 
-  end
-
-  def price
-    @order = Order.find(params[:id])
-    @listing = Listing.find(params[:listing_id])
-
-
-
-    format.html { redirect_to edit_listing_order_path(@order.listing_id, @order.id) }
   end
 
 

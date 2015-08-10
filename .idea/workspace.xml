@@ -28,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="orders_controller.rb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/orders_controller.rb">
+      <file leaf-file-name="_detail.html.erb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/listings/show/_detail.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16601562">
-              <caret line="275" column="4" selection-start-line="275" selection-start-column="4" selection-end-line="275" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.6687243">
+              <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -43,7 +43,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/views/admin/listings/_image_fields.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/admin/listings_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/admin/listings/edit.html.erb" />
         <option value="$PROJECT_DIR$/app/models/listing.rb" />
@@ -52,7 +51,6 @@
         <option value="$PROJECT_DIR$/app/views/pages/home/_lastest.html.erb" />
         <option value="$PROJECT_DIR$/config/environments/development.rb" />
         <option value="$PROJECT_DIR$/config/environments/production.rb" />
-        <option value="$PROJECT_DIR$/app/views/listings/show/_detail.html.erb" />
         <option value="$PROJECT_DIR$/app/views/devise/passwords/new.html.erb" />
         <option value="$PROJECT_DIR$/app/views/devise/passwords/edit.html.erb" />
         <option value="$PROJECT_DIR$/app/views/admin/listings/index.html.erb" />
@@ -93,7 +91,9 @@
         <option value="$PROJECT_DIR$/app/views/orders/orders/_sales.html.erb" />
         <option value="$PROJECT_DIR$/app/mailers/seller_mailer.rb" />
         <option value="$PROJECT_DIR$/app/views/seller_mailer/payout_order.html.erb" />
+        <option value="$PROJECT_DIR$/app/services/airmarket_api.rb" />
         <option value="$PROJECT_DIR$/app/controllers/orders_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/listings/show/_detail.html.erb" />
       </list>
     </option>
   </component>
@@ -182,56 +182,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="airmarket" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="airmarket" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="initializers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="airmarket" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="airmarket" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="environments" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="airmarket" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="airmarket" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -258,7 +208,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="seller_mailer" />
+              <option name="myItemId" value="listings" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -280,7 +230,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="buyer_mailer" />
+              <option name="myItemId" value="listings" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="show" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -629,20 +583,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/application.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.592">
-          <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/devise/registrations/_content.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.036876354">
@@ -878,14 +818,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/listings/show/_detail.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.1687243">
-          <caret line="83" column="35" selection-start-line="83" selection-start-column="35" selection-end-line="83" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/orders/orders/_sales.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20987654">
@@ -1014,10 +946,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/services/mangopay_api.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.9921875">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/orders_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16601562">
-          <caret line="275" column="4" selection-start-line="275" selection-start-column="4" selection-end-line="275" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.29882812">
+          <caret line="279" column="21" selection-start-line="279" selection-start-column="21" selection-end-line="279" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/listings/show/_detail.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6687243">
+          <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
           <folding />
         </state>
       </provider>
