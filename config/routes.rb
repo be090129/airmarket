@@ -15,10 +15,15 @@ Rails.application.routes.draw do
 
   resources :images
 
+  get "listings-list" => "listings#index2"
+
+  #PAGE STATIC
+
   get "about" => "pages#about"
   get "cancellation" => "pages#cancellation"
+  get "terms-of-service" => "pages#termsofservice"
 
-  get "listings-list" => "listings#index2"
+  #BACK OFFICE FRONT
 
   get "manage-listings" => "listings#managelistings"
   get 'manage-listings/:id' => 'listings#edit', as: :modification
@@ -34,6 +39,8 @@ Rails.application.routes.draw do
 
   get 'orders/:id/payoutseller' => 'orders#payoutseller', as: :payoutseller
   patch 'orders/:id/dopayout' => 'orders#dopayout', as: :dopayout
+
+  #BACK OFFICE ADMIN
 
   namespace :admin do
     root to: "admin#home"

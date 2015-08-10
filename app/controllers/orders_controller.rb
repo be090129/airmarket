@@ -327,6 +327,15 @@ class OrdersController < ApplicationController
         #autres actions
         @order.save
         format.html { redirect_to sales_path, notice: 'Refused' }
+      elsif params[:payed]
+
+        if @order.update(order_params) && @order.terms == true
+          @order.validate_terms_date = Time.zone.now.to_datetime
+          @order.save
+          format.html { redirect_to payin_path(@order.id) }
+        else
+          format.html { redirect_to edit_listing_order_path(@order.listing_id,@order.id), notice: 'Merci de valider les conditions generales' }
+        end
       elsif params[:cancelled]
         @order.status = "Cancelled"
         #autres actions
@@ -376,6 +385,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message,:check_payin,:check_payout, :fees_buyer, :fees_seller, :order_payout, :validated_time, :mangopay_transaction_id,:mangopay_payout_id )
+      params.require(:order).permit(:validate_terms_date,:terms, :start_date, :end_date, :order_price, :listing_id,:buyer_id, :seller_id, :status, :message,:check_payin,:check_payout, :fees_buyer, :fees_seller, :order_payout, :validated_time, :mangopay_transaction_id,:mangopay_payout_id )
     end
 end

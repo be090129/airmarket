@@ -8,6 +8,8 @@
 <% elsif order.status == "Validated" %>
     <p>Bonjour <%= order.buyer.first_name %>, </p>
     <p>Votre demande a été pré-approuvée. Merci de procéder au paiement en cliquant sur le bouton "Payer" ci-dessous.</p>
+
+    <p>Avant de procéder au paiement, merci de valider les <%= link_to "conditions générales", terms_of_service_path, target: "_blank"  %>  <%= f.check_box :terms %></p>
     <p>Bonne journée</p>
 <% elsif order.status == "Payed" %>
 
