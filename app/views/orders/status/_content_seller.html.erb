@@ -15,12 +15,13 @@
     <p><b>Prénom :</b> <%= order.buyer.first_name %></p>
     <p><b>Nom :</b> <%= order.buyer.last_name %></p>
     <p><b>Email :</b> <%= order.buyer.email %></p>
-    <p><b>Prix Total :</b> <%= order.order_price - order.fees_seller   %> €</p>
-    <p><b>Dont frais de service :</b> <%= order.fees_buyer %> €</p>
+    <p><b>Prix Total :</b> <%= order.order_price - order.fees_buyer %> €</p>
+    <p><b>Dont frais de service :</b> <%= order.fees_seller %> €</p>
+    <p><b>Versement Net :</b> <%= order.order_payout %> €</p>
 
     <p>Merci de prendre contact directement avec <%= order.buyer.first_name %> pour les dernières modalités.</p>
 <% elsif order.status == "Cancelled" %>
-    <p>Merci de prendre contact avec nos équipesavec l'identifiant : N°<%= order.id %></p>
+    <p>Merci de prendre contact avec nos équipes avec l'identifiant : N°<%= order.id %></p>
 <% elsif order.status == "Refused" %>
 <% elsif order.status == "Expired" %>
 <%end%>

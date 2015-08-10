@@ -15,7 +15,7 @@
               <% if @order.buyer_id == current_user.id %>
                   <h2><%= @order.order_price %> €</h2>
               <% elsif @order.seller_id == current_user.id %>
-                  <h2><%= @order.order_price - @order.fees_seller %> €</h2>
+                  <h2><%= @order.order_price - @order.fees_buyer %> €</h2>
               <%end%>
             </div>
           </div>

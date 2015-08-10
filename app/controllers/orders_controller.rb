@@ -270,8 +270,10 @@ class OrdersController < ApplicationController
   def calculate(listing, order)
 
     #gestion des frais
-    fees_b = 0.03
-    fees_s = 0.1
+      #frais de l'acheteur
+        fees_b = 0.1
+      #frais du vendeur
+        fees_s = 0.03
 
     #calcul
     period = (order.end_date - order.start_date)
@@ -280,8 +282,18 @@ class OrdersController < ApplicationController
     #export
     order.fees_buyer = (fees_b * price).round(0)
     order.fees_seller = (fees_s * price).round(0)
-    order.order_price = price +  order.fees_seller
-    order.order_payout = price -  order.fees_buyer
+    order.order_price = price +  order.fees_buyer
+    order.order_payout = price -  order.seller
+
+  end
+
+  def price
+    @order = Order.find(params[:id])
+    @listing = Listing.find(params[:listing_id])
+
+    calculate(@listing, @order)
+
+    format.html { redirect_to edit_listing_order_path(@order.listing_id, @order.id) }
   end
 
 

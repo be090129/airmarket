@@ -46,7 +46,7 @@
                       <p><%= order.start_date.strftime("%d %B %Y") %> au <%= order.end_date.strftime("%d %B %Y")  %> </p>
                     </td>
                     <td class="center"><%= order.buyer.first_name %></td>
-                    <td class="center"><%= number_to_currency(order.order_price - order.fees_seller, unit: "€", format: "%n %u") %></td>
+                    <td class="center"><%= number_to_currency(order.order_price - order.fees_buyer, unit: "€", format: "%n %u") %></td>
                     <td class="center"><%= link_to "Visualiser", edit_listing_order_path(order.listing_id, order.id) %></td>
                   </tr>
               <% end %>

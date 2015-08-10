@@ -19,11 +19,11 @@
     <p><b>Email :</b> <%= order.seller.email %></p>
 
     <p><b>Prix Total :</b> <%= order.order_price %> €</p>
-    <p><b>dont frais de service :</b> <%= order.fees_seller %> €</p>
+    <p><b>dont frais de service :</b> <%= order.fees_buyer %> €</p>
 
     <p>Merci de prendre contact directement avec <%= order.seller.first_name %> pour les dernières modalités.</p>
 <% elsif order.status == "Cancelled" %>
-    <p>Merci de prendre contact avec nos équipesavec l'identifiant : N°<%= order.id %></p>
+    <p>Merci de prendre contact avec nos équipes avec l'identifiant : N°<%= order.id %></p>
 <% elsif order.status == "Refused" %>
 <% elsif order.status == "Expired" %>
 <%end%>
