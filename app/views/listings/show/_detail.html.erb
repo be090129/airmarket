@@ -7,10 +7,10 @@
               <div class="row">
                 <div class="col-md-12">
                   <h2><%= @listing.name %></h2>
-                  <div id="slider-property" class="carousel slide hidden-xs" data-ride="carousel">
+                  <div id="slider-property" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                       <% @listing.images.each_with_index do |item, index| %>
-                          <li data-target="#slider-property" data-slide-to="<%= index %>" class="">
+                          <li data-target="#slider-property" data-slide-to="<%= index %>" class="hidden-xs">
                                 <div><%= image_tag(item.photo.url(:medium), class: "img-responsive")%></div>
                           </li>
                       <% end %>
