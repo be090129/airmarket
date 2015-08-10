@@ -20,5 +20,10 @@ class SellerMailer < ActionMailer::Base
     mail(:to => order.seller.email, :subject => "Une demande vient d'expirer")
   end
 
+  def payout_order(order)
+    @order = order
+    mail(:to => order.seller.email, :subject => "Nous avons effectué un nouveau versement")
+  end
+
 
 end

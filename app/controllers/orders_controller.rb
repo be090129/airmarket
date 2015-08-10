@@ -132,6 +132,8 @@ class OrdersController < ApplicationController
       @order.check_payin = true
       @order.check_payout = false
       @order.status = "Payed"
+
+      #Email paiement acheteur et vendeur
       BuyerMailer.buyer_payed_order(@order).deliver_now
       SellerMailer.seller_payed_order(@order).deliver_now
       @order.save
@@ -206,7 +208,8 @@ class OrdersController < ApplicationController
         @order.mangopay_payout_id=mangopay_api_call_result_payout["Id"]
         @order.check_payout=true
 
-          #envoie email acompte proprietaire
+        #Email paiement proprietaire
+        SellerMailer.order_payout(@order).deliver_now
 
         @order.save
         flash[:notice] = "Demande de virement effectuee avec succes. Le virement sera effectif dans maximum 2 jours."
@@ -270,6 +273,7 @@ class OrdersController < ApplicationController
   def calculate(listing, order)
 
     #gestion des frais
+
       #frais de l'acheteur
         fees_b = 0.1
       #frais du vendeur
@@ -291,7 +295,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @listing = Listing.find(params[:listing_id])
 
-    calculate(@listing, @order)
+
 
     format.html { redirect_to edit_listing_order_path(@order.listing_id, @order.id) }
   end
@@ -314,7 +318,7 @@ class OrdersController < ApplicationController
         format.html { redirect_to edit_listing_order_path(@order.listing_id, @order.id) }
 
         #Email Seller nouvelle demande
-        SellerMailer.new_order(@order).deliver
+        SellerMailer.new_order(@order).deliver_now
 
       else
         format.html { redirect_to listing_path(@listing), notice: 'Nous avons un probleme technique merci de refaire une demande' }
